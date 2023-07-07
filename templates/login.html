@@ -1,0 +1,86 @@
+{% extends "index.html" %}
+{% block tudo %}
+
+<!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Login</h2>
+        </div>
+
+
+          <div class="col-lg-4">
+
+<!--            <div class="info-container d-flex flex-column align-items-center justify-content-center">-->
+<!--              <div class="info-item d-flex">-->
+<!--                <i class="bi bi-geo-alt flex-shrink-0"></i>-->
+<!--                <div>-->
+<!--                  <h4>Location:</h4>-->
+<!--                  <p>A108 Adam Street, New York, NY 535022</p>-->
+<!--                </div>-->
+<!--              </div>&lt;!&ndash; End Info Item &ndash;&gt;-->
+
+<!--              <div class="info-item d-flex">-->
+<!--                <i class="bi bi-envelope flex-shrink-0"></i>-->
+<!--                <div>-->
+<!--                  <h4>Email:</h4>-->
+<!--                  <p>info@example.com</p>-->
+<!--                </div>-->
+<!--              </div>&lt;!&ndash; End Info Item &ndash;&gt;-->
+
+<!--              <div class="info-item d-flex">-->
+<!--                <i class="bi bi-phone flex-shrink-0"></i>-->
+<!--                <div>-->
+<!--                  <h4>Call:</h4>-->
+<!--                  <p>+1 5589 55488 55</p>-->
+<!--                </div>-->
+<!--              </div>&lt;!&ndash; End Info Item &ndash;&gt;-->
+
+<!--              <div class="info-item d-flex">-->
+<!--                <i class="bi bi-clock flex-shrink-0"></i>-->
+<!--                <div>-->
+<!--                  <h4>Open Hours:</h4>-->
+<!--                  <p>Mon-Sat: 11AM - 23PM</p>-->
+<!--                </div>-->
+<!--              </div>&lt;!&ndash; End Info Item &ndash;&gt;-->
+<!--            </div>-->
+
+          </div>
+
+          <div class="col-lg-8">
+            <form action="/login" method="post" role="form" class="php-email-form">
+              <div class="row">
+<!--                <div class="col-md-6 form-group">-->
+<!--                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>-->
+<!--                </div>-->
+                  <div class="form-group mt-3">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Seu email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="password" class="form-control" name="pass" id="pass" placeholder="Sua senha" required>
+              </div>
+<!--              <div class="form-group mt-3">-->
+<!--                <textarea class="form-control" name="message" rows="7" placeholder="Message" required></textarea>-->
+<!--              </div>-->
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+
+                  <div class="text-center floatleft"><button type="submit">Entrar</button></div>
+                  <div class="text-center floatleft"><button type="submit">Entrar com Google</button></div>
+                  <div class="text-center floatleft"><button type="submit">Cadastrar-se</button></div>
+
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+
+{% endblock tudo %}
