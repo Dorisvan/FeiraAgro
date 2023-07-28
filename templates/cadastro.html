@@ -1,0 +1,57 @@
+{% extends "index.html" %}
+{% block tudo %}
+
+<!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-header">
+          <h2>Cadastro</h2>
+        </div>
+
+          <div class="col-lg-8">
+            <form action="{{ url_for('cadastro') }}" method="POST" role="form" >
+              <div class="row">
+                <div class="form-group mt-3">
+                  <input type="text" name="nome" class="form-control" id="nome" placeholder="Seu nome" required>
+                </div>
+                  <div class="form-group mt-3">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Seu email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="password" class="form-control" name="senha" id="senha" placeholder="Sua senha" required>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Seu endereço (ex.: Bairro Lagoa Seca, Rua João Almeida, n° 50)" required>
+              </div>
+                <div class="form-group mt-3">
+                <input type="text" class="form-control" name="contato" id="contato" placeholder="Seu contato" required>
+              </div>
+              <div class="form-group mt-3">
+                <select name="tipo" required class="form-control">
+                  <option value="Não sei">Escolha se você é um produtor ou consumidor</option>
+                  <option value="Produtor">Produtor</option>
+                  <option value="Consumidor">Consumidor</option>
+                </select>
+
+              </div>
+
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+
+                  <div class="text-center floatleft"><button type="submit">Cadastrar</button></div>
+
+            </form>
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+
+{% endblock tudo %}

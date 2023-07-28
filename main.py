@@ -31,7 +31,7 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 DB_HOST = "localhost"
 DB_USER = "root"
 DB_PASS = ""
-DB_NAME = "feiraagrodb"
+DB_NAME = "feiraagro"
 
 # Autorizações
 
@@ -101,17 +101,15 @@ def cadastro():
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
-        cpf = request.form['cpf']
-        cep = request.form['cep']
-        cidade = request.form['cidade']
-        dt_nasc = request.form['dt_nasc']
-        tipo_sanguineo = request.form['tipo_sanguineo']
-        peso = request.form['peso']
-        telefone = request.form['telefone']
-        opcao_doacao = request.form['opcao_doacao']
         senha = request.form['senha']
+        endereco = request.form['endereco']
+        tipo = request.form['tipo']
+        contato = request.form['contato']
+        estado_login = 0
+        nivel = 0
 
-        usuario = Usuario(cpf, nome, dt_nasc, peso, tipo_sanguineo, cep, cidade, email, senha, 0, telefone, opcao_doacao)
+        usuario = Usuario(nome, email, senha, endereco, tipo, nivel, contato, estado_login)
+
         dao = UsuarioDAO(get_db())
         codigo = dao.Inserir(usuario)
         print(codigo)
@@ -202,7 +200,7 @@ def retorno():
         hash.update(f'{secret}{senha}'.encode('utf-8'))
         senha_criptografada = hash.hexdigest()
 
-        usuario = Usuario("", info_usuario['name'], "", "", "", "", "", info_usuario['email'], senha_criptografada, 0, "", "", "", "")
+        usuario = Usuario( info_usuario['name'], info_usuario['email'], senha_criptografada, "", "", 0,"", "", "")
 
         id = None
 

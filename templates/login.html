@@ -49,7 +49,7 @@
           </div>
 
           <div class="col-lg-8">
-            <form action="/login" method="post" role="form" class="php-email-form">
+            <form action="/login" method="post" role="form" >
               <div class="row">
 <!--                <div class="col-md-6 form-group">-->
 <!--                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>-->
@@ -59,7 +59,7 @@
                 </div>
               </div>
               <div class="form-group mt-3">
-                <input type="password" class="form-control" name="pass" id="pass" placeholder="Sua senha" required>
+                <input type="password" class="form-control" name="senha" id="senha" placeholder="Sua senha" required>
               </div>
 <!--              <div class="form-group mt-3">-->
 <!--                <textarea class="form-control" name="message" rows="7" placeholder="Message" required></textarea>-->
@@ -71,8 +71,8 @@
               </div>
 
                   <div class="text-center floatleft"><button type="submit">Entrar</button></div>
-                  <div class="text-center floatleft"><button type="submit">Entrar com Google</button></div>
-                  <div class="text-center floatleft"><button type="submit">Cadastrar-se</button></div>
+                  <div class="text-center floatleft"><a href="/login_google">Entrar com Google</a></div>
+                  <div class="text-center floatleft"><button type="submit"><a href="/cadastro" class="cad_a">Cadastre-se</a></button></div>
 
             </form>
           </div><!-- End Contact Form -->

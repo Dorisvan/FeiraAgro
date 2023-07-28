@@ -1859,6 +1859,11 @@ section {
     float:left;
     padding-right: 10px;
     text-align: center;
+    color: white;
+}
+
+.cad_a {
+    color: white;
 }
 
 @keyframes animate-loading {

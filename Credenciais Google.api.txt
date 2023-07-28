@@ -1,3 +1,3 @@
-Id do cliente: 578342077117-29oc23tg5krfm0mrh690e0pses9joats.apps.googleusercontent.com
+Id do cliente: 319753912667-uf8sn7onuvg4f3ktb9lbvdsjd8lm69ab.apps.googleusercontent.com
 
-Secret key: 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
+Secret key: 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
