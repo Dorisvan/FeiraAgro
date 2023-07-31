@@ -27,26 +27,8 @@ CREATE TABLE IF NOT EXISTS `feiraagro`.`Usuario` (
   `nivel` INT NOT NULL,
   `contato` VARCHAR(50) NULL,
   `estado_login` INT NULL,
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `feiraagro`.`Pedido`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `feiraagro`.`Pedido` (
-  `codigo` BIGINT NOT NULL,
-  `data` DATE NOT NULL,
-  `situacao` VARCHAR(50) NOT NULL,
-  `modo_entrega` VARCHAR(50) NOT NULL,
-  `Usuario_codigo` BIGINT NOT NULL,
   PRIMARY KEY (`codigo`),
-  INDEX `fk_Compra_Usuario1_idx` (`Usuario_codigo` ASC),
-  CONSTRAINT `fk_Compra_Usuario1`
-    FOREIGN KEY (`Usuario_codigo`)
-    REFERENCES `feiraagro`.`Usuario` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
 
 
@@ -63,18 +45,37 @@ CREATE TABLE IF NOT EXISTS `feiraagro`.`Produto` (
   `img_produto` VARCHAR(50) NULL,
   `descricao` VARCHAR(500) NULL,
   `Usuario_codigo` BIGINT NOT NULL,
-  `Pedido_codigo` BIGINT NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `fk_Produto_Usuario1_idx` (`Usuario_codigo` ASC),
-  INDEX `fk_Produto_Pedido1_idx` (`Pedido_codigo` ASC),
   CONSTRAINT `fk_Produto_Usuario1`
     FOREIGN KEY (`Usuario_codigo`)
     REFERENCES `feiraagro`.`Usuario` (`codigo`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `feiraagro`.`Pedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `feiraagro`.`Pedido` (
+  `codigo` BIGINT NOT NULL,
+  `data` DATE NOT NULL,
+  `situacao` VARCHAR(50) NOT NULL,
+  `modo_entrega` VARCHAR(50) NOT NULL,
+  `Usuario_codigo` BIGINT NOT NULL,
+  `Produto_codigo` BIGINT NOT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `fk_Compra_Usuario1_idx` (`Usuario_codigo` ASC),
+  INDEX `fk_Pedido_Produto1_idx` (`Produto_codigo` ASC),
+  CONSTRAINT `fk_Compra_Usuario1`
+    FOREIGN KEY (`Usuario_codigo`)
+    REFERENCES `feiraagro`.`Usuario` (`codigo`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Produto_Pedido1`
-    FOREIGN KEY (`Pedido_codigo`)
-    REFERENCES `feiraagro`.`Pedido` (`codigo`)
+  CONSTRAINT `fk_Pedido_Produto1`
+    FOREIGN KEY (`Produto_codigo`)
+    REFERENCES `feiraagro`.`Produto` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

@@ -18,6 +18,12 @@ import ssl
 
 from models.Usuario import Usuario
 from models.UsuarioDAO import UsuarioDAO
+from models.Produto import Produto
+from models.ProdutoDAO import ProdutoDAO
+from models.Perfil_Produtor import Perfil_Produtor
+from models.Perfil_ProdutorDAO import Perfil_ProdutorDAO
+from models.Pedido import Pedido
+from models.PedidoDAO import PedidoDAO
 
 
 # Variáveis gerais
@@ -192,6 +198,7 @@ def retorno():
     dao = UsuarioDAO(get_db())
 
     user = dao.Buscar_email(email_busc)
+    print(user)
 
     if user is None:
         hash = hashlib.sha512()
@@ -212,6 +219,7 @@ def retorno():
             return redirect(url_for("login"))
         else:
             user = dao.autenticar(usuario.email, usuario.senha)
+            print(user)
 
     session['logado'] = {
         'codigo': user[0],
@@ -240,35 +248,39 @@ def logout():
 # Função de notificação
 
 
+
+
 # Funções de CREATE
 
-@app.route('/solicitar',  methods=['GET', 'POST'])
-def solicitar():
+@app.route('/cadastrar_produto',  methods=['GET', 'POST'])
+def cadastrar_produto():
     daoUsuario = UsuarioDAO(get_db())
     informacoes_usuario = session.get('logado')
-    usuario_nivel = informacoes_usuario['nivel_usuario']
+    usuario_nivel = informacoes_usuario['nivel']
     usuario_codigo = informacoes_usuario['codigo']
 
     if request.method == 'POST':
-        data = request.form['data']
-        urgencia = request.form['urgencia']
-        local_internacao = request.form['local_internacao']
-        usuario_codigo = request.form['usuario_codigo']
-        situacao = "Pendente"
+        nome = request.form['nome']
+        quantidade = request.form['quantidade']
+        valor = request.form['valor']
+        classificacao = request.form['classificacao']
+        procedencia = request.form['procedencia']
+        img_produto = request.form['img_produto']
+        descricao = request.form['descricao']
 
-        solicitacao = Solicitacao(data, urgencia, local_internacao, situacao, usuario_codigo)
+        produto = Produto(nome, quantidade, valor, classificacao, procedencia, usuario_codigo, img_produto, descricao)
 
-        dao = SolicitacaoDAO(get_db())
-        codigo = dao.Inserir(solicitacao)
+        dao = ProdutoDAO(get_db())
+        codigo = dao.Inserir(produto)
 
         if codigo > 0:
             flash("Solicitação cadastrada com sucesso! Código %d" % codigo, "success")
         else:
             flash("Erro ao cadastrar solicitação! Verifique seus dados novamente.", "danger")
 
-    usuarios_db = daoUsuario.Listar(usuario_codigo, "Checagem_individual")
-    print(usuarios_db)
-    return render_template("solicitar.html", titulo="Solicitação", usuarios=usuarios_db,)
+    #produtos_db = daoProduto.Listar(produto_codigo, "Checagem_individual")
+
+    return render_template("cadastrar_produto.html", titulo="Cadastrar_Produto")
 
 
 @app.route('/doar',  methods=['GET', 'POST'])

@@ -1,5 +1,5 @@
 class Produto():
-    def __init__(self, nome, quantidade, valor, classificacao, procedencia, usuario_codigo, pedido_codigo, img_produto="", descricao=""):
+    def __init__(self, nome, quantidade, valor, classificacao, procedencia, usuario_codigo, img_produto="", descricao=""):
         self.codigo = 0
         self.nome = nome
         self.quantidade = quantidade
@@ -9,7 +9,6 @@ class Produto():
         self.img_produto = img_produto
         self.descricao = descricao
         self.usuario_codigo = usuario_codigo
-        self.pedido_codigo = pedido_codigo
 
     def getCodigo(self):
         return self.codigo
