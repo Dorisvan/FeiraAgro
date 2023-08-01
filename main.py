@@ -91,7 +91,12 @@ def close_connection(exception):
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    try:
+        informacoes_usuario = session.get('logado')
+        estado_login = informacoes_usuario['estado_login']
+    except:
+        estado_login = 0
+    return render_template("index.html", estado_login = estado_login)
 
 
 @app.route('/painel')

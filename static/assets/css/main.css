@@ -2667,3 +2667,145 @@ section {
 .footer .credits a {
   color: #fff;
 }
+
+.botao-cadastro {
+    background: #99d98c;
+    border: 0;
+    padding: 10px 35px;
+    color: #fff;
+    transition: 0.4s;
+    border-radius: 50px;
+}
+.tabela_interna {
+    overflow-y: scroll;
+    max-height: 300px;
+    margin-top: 15px;
+    margin: 10px;
+    padding-bottom: 20px;
+}
+
+
+.div_externa table thead{
+    position: sticky;
+    top: 0px;
+    background-color: #fff
+
+}
+
+.div_externa{
+    height: 350px;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.div_externa_form_solicitacao{
+    height: 500px;
+    width: 800px;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background-color: #fff;
+}
+
+.div_externa_form_cadastro{
+    height: relative;
+    width: 800px;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background-color: #fff;
+}
+
+.div_externa_form_login{
+    height: 400px;
+    width: 600px;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background-color: #fff;
+}
+
+.div_externa_listar_usuario{
+    height: 450px;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.tabela_interna_listar_usuario {
+    overflow-y: scroll;
+    max-height: 400px;
+    margin-top: 15px;
+    margin: 10px;
+    padding-bottom: 20px;
+}
+
+.botao-google{
+    background-color
+    text-color =
+}
+
+.div_externa_form_saude{
+    height: 400px;
+    width: 800px;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background-color: #fff;
+}
+
+.inputs{
+
+}
+
+. button[type=submit] {
+  background: #99d98c;
+  border: 0;
+  padding: 10px 35px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.appointment-btn {
+  margin-left: 25px;
+  background: #E93138;
+  color: #fff;
+  border-radius: 50px;
+  padding: 8px 25px;
+  white-space: nowrap;
+  transition: 0.3s;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.appointment button[type=submit]:hover {
+  background: #99d98c;
+}
+
+.contact .php-email-form button[type=submit] {
+  background: #1977cc;
+  border: 0;
+  padding: 10px 35px;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+button:hover {
+  color: #00b6a1;
+  text-decoration: none;
+}

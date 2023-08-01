@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Projeto verdin</title>
+  <title>FeiraAGRO</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -42,7 +42,7 @@
   <header id="header" class="header d-flex align-items-center">
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>FeiraAgro<span>.</span></h1>
@@ -50,8 +50,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="/">Início</a></li>
-          <li><a href="/cadastro">Cadastro</a></li>
-          <li><a href="/login">Login</a></li>
+            <li><a href="/painel">Painel</a></li>
           <li><a href="#portfolio">Categorias</a></li>
 <!--          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>-->
 <!--            <ul>-->
@@ -70,7 +69,10 @@
 <!--              <li><a href="#">Drop Down 4</a></li>-->
 <!--            </ul>-->
 <!--          </li>-->
-          <li><a href="#contact">Contato</a></li>
+          <li><a href="#footer">Contato</a></li>
+          <li><a href="/cadastro">Cadastro</a></li>
+          <li><a href="/login">Login</a></li>
+          <li><a href="/logout">Sair</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -88,10 +90,10 @@
     <div class="container position-relative">
       <div class="row gy-5" data-aos="fade-in">
         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-          <h2>BEM VINDO A <span>CODINOMEAGRO</span></h2>
+          <h2>BEM VINDO A <span>FEIRAAGRO</span></h2>
           <p>Compra e venda de itens agrícolas da Feira Agro do IFRN Campus Apodi.</p>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="#/login" class="btn-get-started">ENTRE COM SUA CONTA GOOGLE</a>
+            <a href="/login" class="btn-get-started">ENTRE COM SUA CONTA GOOGLE</a>
             <br>
           </div>
         </div>
@@ -104,6 +106,89 @@
   <!-- End Hero Section -->
 
   <main id="main">
+
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4">
+            <div class="content px-xl-5">
+              <h3><strong>OBJETIVOS</strong></h3>
+              <p>
+                O site do FeiraAgro tem como objetivo facilitar a comercialização de produtos da agricultura familiar. Ele oferece diversas ferramentas e informações para auxiliar nesse processo.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-8">
+
+            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
+                    <span class="num">1.</span>
+                    MISSÃO
+                  </button>
+                </h3>
+                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                  O site do FeiraAgro é uma plataforma online que visa promover a comercialização de produtos da agricultura familiar no âmbito do instituto.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
+                    <span class="num">2.</span>
+                    COMO FUNCIONA?
+                  </button>
+                </h3>
+                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Ele oferece um espaço virtual onde produtores da agricultura familiar podem cadastrar seus produtos e disponibilizá-los para venda.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
+                    <span class="num">3.</span>
+                    PARA PRODUTORES
+                  </button>
+                </h3>
+                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Além disso, o site também oferece recursos para facilitar a negociação entre os produtores e os potenciais compradores, como a possibilidade de entrar em contato diretamente com o produtor.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+
+              <div class="accordion-item">
+                <h3 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
+                    <span class="num">4.</span>
+                    PARA CONSUMIDORES
+                  </button>
+                </h3>
+                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+                  <div class="accordion-body">
+                    Ao acessar o site, os clientes têm acesso a uma ampla variedade de produtos frescos e saudáveis, diretamente dos produtores locais. Eles podem explorar diferentes categorias de produtos, como frutas, legumes, laticínios, entre outros. Cada produto possui uma descrição detalhada, incluindo informações sobre o produtor, o local de produção, o método de cultivo e os certificados de qualidade. Além disso, os clientes podem entrar em contato diretamente com os produtores para fazer perguntas adicionais ou negociar detalhes da compra.
+                  </div>
+                </div>
+              </div><!-- # Faq item-->
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
 
 
 
@@ -136,7 +221,7 @@
                 <img src="static/assets/img/CATEGORIAS/HORTA.png" class="img-fluid" alt="">
                 <div class="portfolio-info">
                   <h4>HORTALIÇAS<a href="portfolio-details.html" title="More Details"></a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <p> Elas são uma parte essencial de uma dieta saudável e equilibrada, pois são ricas em vitaminas, minerais, fibras e antioxidantes.</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -146,7 +231,7 @@
                 <img src="static/assets/img/CATEGORIAS/ARROZ.png" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="portfolio-details.html" title="More Details">GRÃOS E CEREAIS</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <p>Grãos integrais são uma opção mais saudável, pois contêm todas as partes do grão, incluindo o farelo e o germe.</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -156,7 +241,7 @@
                 <img src="static/assets/img/CATEGORIAS/BOLOS.png" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="portfolio-details.html" title="More Details">PÃES E BOLOS</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <p>Eles são uma fonte de carboidratos e podem ser enriquecidos com vitaminas e minerais.</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -166,7 +251,7 @@
                 <img src="static/assets/img/CATEGORIAS/FRUITAS.png" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="portfolio-details.html" title="More Details">FRUTAS</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <p>Eles são uma fonte de carboidratos e podem ser enriquecidos com vitaminas e minerais.</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -176,7 +261,7 @@
                 <img src="static/assets/img/CATEGORIAS/LEITE.png" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="portfolio-details.html" title="More Details">DERIVADOS DE LEITE</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <p>Eles são uma fonte importante de cálcio, proteínas e vitaminas do complexo B.</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -186,7 +271,7 @@
                 <img src="static/assets/img/CATEGORIAS/MOLHOS.png" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="portfolio-details.html" title="More Details">MOLHOS E CONDIMETOS</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <p>Os molhos e condimentos são usados para adicionar sabor aos alimentos.</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -196,57 +281,7 @@
                 <img src="static/assets/img/CATEGORIAS/SUCOS.png" class="img-fluid" alt=""></a>
                 <div class="portfolio-info">
                   <h4><a href="portfolio-details.html" title="More Details">SUCOS E POLPAS</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-              <div class="portfolio-wrap">
-                <a href="static/assets/img/portfolio/books-2.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="static/assets/img/portfolio/books-2.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <a href="static/assets/img/portfolio/app-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="static/assets/img/portfolio/app-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-              <div class="portfolio-wrap">
-                <a href="static/assets/img/portfolio/product-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="static/assets/img/portfolio/product-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-              <div class="portfolio-wrap">
-                <a href="static/assets/img/portfolio/branding-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="static/assets/img/portfolio/branding-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-              <div class="portfolio-wrap">
-                <a href="static/assets/img/portfolio/books-3.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="static/assets/img/portfolio/books-3.jpg" class="img-fluid" alt=""></a>
-                <div class="portfolio-info">
-                  <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
+                  <p>Os sucos e polpas são bebidas feitas a partir de frutas e podem ser uma fonte de vitaminas e minerais.</p>
                 </div>
               </div>
             </div><!-- End Portfolio Item -->
@@ -259,105 +294,8 @@
     </section><!-- End Portfolio Section -->
 
 
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq">
-      <div class="container" data-aos="fade-up">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4">
-            <div class="content px-xl-5">
-              <h3>Frequently Asked <strong>Questions</strong></h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-8">
-
-            <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
-
-              <div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                    <span class="num">1.</span>
-                    Non consectetur a erat nam at lectus urna duis?
-                  </button>
-                </h3>
-                <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-              <div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                    <span class="num">2.</span>
-                    Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
-                  </button>
-                </h3>
-                <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-              <div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                    <span class="num">3.</span>
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
-                  </button>
-                </h3>
-                <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-              <div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-4">
-                    <span class="num">4.</span>
-                    Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
-                  </button>
-                </h3>
-                <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-              <div class="accordion-item">
-                <h3 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-content-5">
-                    <span class="num">5.</span>
-                    Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
-                  </button>
-                </h3>
-                <div id="faq-content-5" class="accordion-collapse collapse" data-bs-parent="#faqlist">
-                  <div class="accordion-body">
-                    Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-                  </div>
-                </div>
-              </div><!-- # Faq item-->
-
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Frequently Asked Questions Section -->
-
   {% endblock tudo %}
-    
+
 
   </main><!-- End #main -->
 
@@ -366,17 +304,16 @@
 
     <div class="container">
       <div class="row gy-4">
-        
+
 
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contact Us</h4>
+          <h4>Forma de Contato</h4>
           <p>
-            A108 Adam Street <br>
-            New York, NY 535022<br>
-            United States <br><br>
-            <strong>Phone:</strong> +1 5589 55488 55<br>
-            <strong>Email:</strong> info@example.com<br>
+            Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte | Apodi
+                  <br>Rodovia RN 233, KM 02, nº. 1000, Bairro Chapada do Apodi, Apodi-RN, CEP: 59.700-000.<br>
+                <strong>Telefone:</strong> (84) 4005-4101<br>
+                <strong>Email:</strong>feiraagro6@gmail.com<br>
           </p>
 
         </div>
