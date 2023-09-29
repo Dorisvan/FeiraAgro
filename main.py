@@ -287,6 +287,43 @@ def cadastrar_produto():
 
     return render_template("cadastrar_produto.html", titulo="Cadastrar_Produto")
 
+@app.route('/perfil_produtor', methods=['GET','POST'])
+def perfil_produtor():
+    dao = Perfil_ProdutorDAO
+    informacoes_usuario = session.get('logado')
+    usuario_codigo = informacoes_usuario['codigo']
+    usuario_tipo = informacoes_usuario['tipo']
+
+    print(usuario_codigo)
+
+    resultado_busca = dao.Buscar_perfil(usuario_codigo)
+    print(resultado_busca)
+
+    if usuario_tipo == "produtor":
+        if resultado_busca != None:
+            pass
+        else:
+            if request.method == "POST":
+                descricao_producao = request.form["descricao_producao"]
+                local_venda = request.form["local_venda"]
+                img0 = request.form["img0"]
+                img1 = request.form["img1"]
+                img2 = request.form["img2"]
+                img3 = request.form["img3"]
+
+                perfil_produtor = Perfil_Produtor(descricao_producao, local_venda, img0, img1, img2, img3, usuario_codigo)
+
+                perfil = dao.Inserir(perfil_produtor)
+    else:
+        pass
+
+
+@app.route('/visualizar_perfil/<int:codigo>', methods=['GET', 'POST'])
+def visualizar_perfil(codigo):
+    dao = Perfil_ProdutorDAO(get_db())
+    return render_template("visualizar_perfil.html", perfil= _db)
+
+
 
 @app.route('/doar',  methods=['GET', 'POST'])
 def doar():
