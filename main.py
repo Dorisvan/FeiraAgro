@@ -289,7 +289,7 @@ def cadastrar_produto():
 
 @app.route('/perfil_produtor', methods=['GET','POST'])
 def perfil_produtor():
-    dao = Perfil_ProdutorDAO
+    dao = Perfil_ProdutorDAO(get_db())
     informacoes_usuario = session.get('logado')
     usuario_codigo = informacoes_usuario['codigo']
     usuario_tipo = informacoes_usuario['tipo']
@@ -299,9 +299,11 @@ def perfil_produtor():
     resultado_busca = dao.Buscar_perfil(usuario_codigo)
     print(resultado_busca)
 
+    variavel_condicional = resultado_busca
+
     if usuario_tipo == "produtor":
         if resultado_busca != None:
-            pass
+            vartitulo = "Visualizar_perfil"
         else:
             if request.method == "POST":
                 descricao_producao = request.form["descricao_producao"]
@@ -317,11 +319,24 @@ def perfil_produtor():
     else:
         pass
 
+    return render_template("perfil_produtor.html", titulo=vartitulo, variavel_condicional=variavel_condicional )
 
-@app.route('/visualizar_perfil/<int:codigo>', methods=['GET', 'POST'])
-def visualizar_perfil(codigo):
+
+@app.route('/listar_perfis', methods=['GET','POST'])
+def listar_perfis():
     dao = Perfil_ProdutorDAO(get_db())
-    return render_template("visualizar_perfil.html", perfil= _db)
+    perfil_produtor_db = dao.listar()
+    return render_template("listar_item.html", perfil_produtor=perfil_produtor_db)
+
+
+@app.route('/visualizar_perfil', methods=['GET', 'POST'])
+def visualizar_perfil():
+    dao = Perfil_ProdutorDAO(get_db())
+    informacoes_usuario = session.get('logado')
+    codigo = informacoes_usuario['codigo']
+    print(codigo)
+    perfil_produtor_db = dao.visualizar_perfil(codigo)
+    return render_template("visualizar_perfil.html", perfil_produtor=perfil_produtor_db)
 
 
 
