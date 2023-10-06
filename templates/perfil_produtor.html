@@ -1,19 +1,21 @@
 {% extends "index.html" %}
 {% block tudo %}
 
+{% if variavel_condicional == "Não_criado" %}
+
 <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>Cadastro de Produtos</h2>
+          <h2>Cadastrar Perfil do Produtor</h2>
         </div>
 
           <div class="col-lg-8">
             <form action="{{ url_for('perfil_produtor') }}" method="POST" role="form" >
               <div class="row">
                 <div class="form-group mt-3">
-                  <textarea class="form-control" name="descricao" rows="7" placeholder="Descreva de sua produção" ></textarea>
+                  <textarea class="form-control" name="descricao_producao" rows="7" placeholder="Descreva de sua produção" ></textarea>
                 </div>
                   <div class="form-group mt-3">
                   <input type="text" class="form-control" name="local_venda" id="local_venda" placeholder="Local de venda">
@@ -27,10 +29,6 @@
                 <input type="file" class="form-control" name="img2" id="img2" placeholder="Terceira imagem">
                 <input type="file" class="form-control" name="img3" id="img3" placeholder="Quarta imagem">
               </div>
-              <div class="form-group mt-3">
-                <textarea class="form-control" name="descricao" rows="7" placeholder="Descrição" ></textarea>
-              </div>
-
 
               <div class="my-3">
                 <div class="loading">Loading</div>
@@ -47,6 +45,73 @@
 
       </div>
     </section><!-- End Contact Section -->
+
+{% else %}
+
+<section id="appointment" class="appointment section-bg" style="position: relative; height: 600px;">
+
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="page-header d-flex align-items-center" style="background-image: url('');">
+        <div class="container position-relative">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 text-center">
+              <h2>Perfil</h2>
+              <p>Perfil do produtor</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Perfil</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Breadcrumbs -->
+
+
+              <div class="col-lg-8">
+                <div class="portfolio-description">
+                {% if perfil_produtor %}
+                      <h2>perfil {{ perfil_produtor[0] }}</h2>
+
+                    <div class="reply-form">
+
+                    <table class="table">
+                      <tbody>
+                          <tr>
+                            <td>Código</td>
+                            <td>{{ perfil_produtor[0] }}</td>
+                          </tr>
+                          <tr>
+                            <td>Tipo</td>
+                            <td>{{ perfil_produtor[1] }}</td>
+                          </tr>
+                          <tr>
+                            <td>Usuario</td>
+                            <td>{{ perfil_produtor[4] }}</td>
+                          </tr>
+                           <tr>
+                            <td>Status</td>
+                            <td>{{ perfil_produtor[6] }}</td>
+                          </tr>
+
+                {% else %}
+                     <p>Nenhum item foi encontrado</p>
+                {% endif %}
+                      </tbody>
+                    </table>
+                    </div>
+
+
+
+ </section>
+
+{% endif %}
 
 
 {% endblock tudo %}

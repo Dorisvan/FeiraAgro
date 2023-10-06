@@ -8,7 +8,7 @@ class Perfil_ProdutorDAO():
                   "VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
             cursor = self.con.cursor()
-            cursor.execute(sql, (perfil.descricao_producao, perfil.local_venda, perfil.img0, perfil.img1, perfil.img2, perfil.img3, perfil.Usuario_codigo))
+            cursor.execute(sql, (perfil.descricao_producao, perfil.local_venda, perfil.img0, perfil.img1, perfil.img2, perfil.img3, perfil.usuario_codigo))
 
             self.con.commit()
 
@@ -28,8 +28,6 @@ class Perfil_ProdutorDAO():
 
             perfil = cursor.fetchone()
 
-            print(perfil)
-
             if perfil == None:
                 resultado = "Não_criado"
             else:
@@ -43,18 +41,18 @@ class Perfil_ProdutorDAO():
 
 
     def visualizar_perfil(self, codigo):
+        cursor = self.con.cursor()
         try:
-            sql = "SELECT p.codigo, p.descricao_producao, p.local_venda, p.img0, p.img1, p.img2, p.img3, p.Usuario_codigo, u.nome, u.email, u.endereco, u.contato" \
-                  "FROM Perfil_Produtor as p, Usuario as u" \
-                  "WHERE p.Usuario_codigo = u.codigo AND" \
-                  "     u.codigo = %s"
-            cursor = self.con.cursor()
+            sql = "SELECT p.codigo, p.descricao_producao, p.local_venda, p.img0, p.img1, p.img2, p.img3, p.Usuario_codigo, u.nome, u.email, u.endereco, u.contato " \
+                  "FROM Perfil_Produtor as p, Usuario as u " \
+                  "WHERE p.Usuario_codigo = u.codigo AND u.codigo = %s"
+
             cursor.execute(sql, (codigo, ))
-            perfil = cursor.fetchall()
+            perfil = cursor.fetchone()
             print(perfil)
             return perfil
         except:
-            pass
+            print("gg")
 
     def listar(self, codigo=None):
         try:

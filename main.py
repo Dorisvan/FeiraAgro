@@ -44,7 +44,9 @@ DB_NAME = "feiraagro"
 app.auth = {
     # acao: { perfil:permissao }
     'painel': {0:1, 1:1},
-    'logout': {0:1, 1:1}
+    'logout': {0:1, 1:1},
+    'perfil_produtor': {0:1, 1:1},
+    'visualizar_perfil': {0:1, 1:1}
 
 }
 
@@ -301,10 +303,13 @@ def perfil_produtor():
 
     variavel_condicional = resultado_busca
 
-    if usuario_tipo == "produtor":
-        if resultado_busca != None:
-            vartitulo = "Visualizar_perfil"
+    if usuario_tipo == "Produtor":
+        if resultado_busca == "Criado":
+            vartitulo = "Visualizar-Perfil"
+            visualizar_perfil()
+
         else:
+            vartitulo = "Cadastrar-Perfil"
             if request.method == "POST":
                 descricao_producao = request.form["descricao_producao"]
                 local_venda = request.form["local_venda"]
@@ -315,7 +320,10 @@ def perfil_produtor():
 
                 perfil_produtor = Perfil_Produtor(descricao_producao, local_venda, img0, img1, img2, img3, usuario_codigo)
 
+                print(perfil_produtor)
+
                 perfil = dao.Inserir(perfil_produtor)
+
     else:
         pass
 

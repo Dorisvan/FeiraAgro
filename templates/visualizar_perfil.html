@@ -29,8 +29,8 @@
 
               <div class="col-lg-8">
                 <div class="portfolio-description">
-                {% if visualizar_perfil %}
-                      <h2>perfil {{ visualizar_perfil[0] }}</h2>
+                {% if perfil_produtor %}
+                      <h2>perfil {{ perfil_produtor[0] }}</h2>
 
                     <div class="reply-form">
 
@@ -38,19 +38,19 @@
                       <tbody>
                           <tr>
                             <td>Código</td>
-                            <td>{{ visualizar_perfil[0] }}</td>
+                            <td>{{ perfil_produtor[0] }}</td>
                           </tr>
                           <tr>
                             <td>Tipo</td>
-                            <td>{{ visualizar_perfil[1] }}</td>
+                            <td>{{ perfil_produtor[1] }}</td>
                           </tr>
                           <tr>
                             <td>Usuario</td>
-                            <td>{{ visualizar_perfil[4] }}</td>
+                            <td>{{ perfil_produtor[4] }}</td>
                           </tr>
                            <tr>
                             <td>Status</td>
-                            <td>{{ visualizar_perfil[6] }}</td>
+                            <td>{{ perfil_produtor[6] }}</td>
                           </tr>
 
                 {% else %}
