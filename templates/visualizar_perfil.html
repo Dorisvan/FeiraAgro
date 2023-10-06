@@ -1,66 +1,199 @@
 {% extends "index.html" %}
 {% block tudo %}
 
+{% if tipo == "Produtor" %}
+    <section id="appointment" class="appointment section-bg" style="position: relative; height: 600px;">
+
+
+        <!-- ======= Breadcrumbs ======= -->
+        <div class="breadcrumbs">
+          <div class="page-header d-flex align-items-center" style="background-image: url('');">
+            <div class="container position-relative">
+              <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                  <h2>Perfil</h2>
+                  <p>Perfil do produtor</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav>
+            <div class="container">
+              <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>Perfil</li>
+              </ol>
+            </div>
+          </nav>
+        </div><!-- End Breadcrumbs -->
+    </section>
+
+
+       <!-- ======= Projet Details Section ======= -->
+        <section id="project-details" class="project-details">
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+
+            <table class="table">
+
+                  <div class="col-lg-8">
+
+                    {% if perfil_produtor %}
+                          <h2>Perfil {{ perfil_produtor[8] }}</h2>
+
+                        <div class="reply-form">
+
+                        <table class="table">
+                          <tbody>
+                              <tr>
+                                <td>Nome</td>
+                                <td>{{ perfil_produtor[8] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Descrição do Produto</td>
+                                <td>{{ perfil_produtor[1] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Local de Venda</td>
+                                <td>{{ perfil_produtor[2] }}</td>
+                              </tr>
+                               <tr>
+                                <td>Imagem</td>
+                                <td>{{ perfil_produtor[3] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Imagem</td>
+                                <td>{{ perfil_produtor[4] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Imagem</td>
+                                <td>{{ perfil_produtor[5] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Imagem</td>
+                                <td>{{ perfil_produtor[6] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Email</td>
+                                <td>{{ perfil_produtor[9] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Endereço</td>
+                                <td>{{ perfil_produtor[10] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Contato</td>
+                                <td>{{ perfil_produtor[11] }}</td>
+                              </tr>
+                    {% else %}
+                         <p>Nenhum item foi encontrado</p>
+                    {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+
+          <div class="section-title"></div>
+
+    </section>
+
+{% else %}
 <section id="appointment" class="appointment section-bg" style="position: relative; height: 600px;">
 
 
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs">
-      <div class="page-header d-flex align-items-center" style="background-image: url('');">
-        <div class="container position-relative">
-          <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 text-center">
-              <h2>Perfil</h2>
-              <p>Perfil do produtor</p>
+        <!-- ======= Breadcrumbs ======= -->
+        <div class="breadcrumbs">
+          <div class="page-header d-flex align-items-center" style="background-image: url('');">
+            <div class="container position-relative">
+              <div class="row d-flex justify-content-center">
+                <div class="col-lg-6 text-center">
+                  <h2>Perfil</h2>
+                  <p>Perfil do produtor</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <nav>
-        <div class="container">
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Perfil</li>
-          </ol>
-        </div>
-      </nav>
-    </div><!-- End Breadcrumbs -->
+          <nav>
+            <div class="container">
+              <ol>
+                <li><a href="index.html">Home</a></li>
+                <li>Perfil</li>
+              </ol>
+            </div>
+          </nav>
+        </div><!-- End Breadcrumbs -->
+    </section>
 
 
-              <div class="col-lg-8">
-                <div class="portfolio-description">
-                {% if perfil_produtor %}
-                      <h2>perfil {{ perfil_produtor[0] }}</h2>
-
-                    <div class="reply-form">
-
-                    <table class="table">
-                      <tbody>
-                          <tr>
-                            <td>Código</td>
-                            <td>{{ perfil_produtor[0] }}</td>
-                          </tr>
-                          <tr>
-                            <td>Tipo</td>
-                            <td>{{ perfil_produtor[1] }}</td>
-                          </tr>
-                          <tr>
-                            <td>Usuario</td>
-                            <td>{{ perfil_produtor[4] }}</td>
-                          </tr>
-                           <tr>
-                            <td>Status</td>
-                            <td>{{ perfil_produtor[6] }}</td>
-                          </tr>
-
-                {% else %}
-                     <p>Nenhum item foi encontrado</p>
-                {% endif %}
-                      </tbody>
-                    </table>
-                    </div>
+       <!-- ======= Projet Details Section ======= -->
+        <section id="project-details" class="project-details">
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
 
 
+            <table class="table">
 
- </section>
+                  <div class="col-lg-8">
+
+                    {% if perfil_produtor %}
+                      {% for p in perfil_produtor %}
+                          <h2>Perfil {{ p[8] }}</h2>
+
+                        <div class="reply-form">
+
+                        <table class="table">
+                          <tbody>
+                              <tr>
+                                <td>Nome</td>
+                                <td>{{ p[8] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Descrição do Produto</td>
+                                <td>{{ p[1] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Local de Venda</td>
+                                <td>{{ p[2] }}</td>
+                              </tr>
+                               <tr>
+                                <td>Imagem</td>
+                                <td>{{ p[3] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Imagem</td>
+                                <td>{{ p[4] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Imagem</td>
+                                <td>{{ p[5] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Imagem</td>
+                                <td>{{ p[6] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Email</td>
+                                <td>{{ p[9] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Endereço</td>
+                                <td>{{ p[10] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Contato</td>
+                                <td>{{ p[11] }}</td>
+                              </tr>
+                        {% endfor %}
+                    {% else %}
+                         <p>Nenhum item foi encontrado</p>
+                    {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+
+          <div class="section-title"></div>
+{% endif %}
+
 {% endblock tudo %}

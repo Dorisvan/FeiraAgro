@@ -289,6 +289,39 @@ def cadastrar_produto():
 
     return render_template("cadastrar_produto.html", titulo="Cadastrar_Produto")
 
+
+@app.route('/area_do_usuario', methods=['GET','POST'])
+def area_do_usuario():
+    dao = UsuarioDAO(get_db())
+
+    informacoes_usuario = session.get('logado')
+    usuario_nivel = informacoes_usuario['nivel']
+    usuario_codigo = informacoes_usuario['codigo']
+
+
+    if request.method == "POST":
+        nome = request.form['nome']
+        email = request.form['email']
+        senha = request.form['senha']
+        endereco = request.form['endereco']
+        tipo = request.form['tipo']
+        contato = request.form['contato']
+        nivel = 0
+
+        usuario = Usuario(nome, email, senha, endereco, tipo, nivel, contato)
+        usuario.setCodigo(usuario_codigo)
+        ret = dao.Atualizar(usuario)
+
+        if ret > 0:
+            flash("Atualização concluída com sucesso! Código %d" % ret, "success")
+        else:
+            flash("Erro ao atualizar!", "danger")
+
+
+    usuario_db = dao.Listar(usuario_codigo, "Checagem_individual")
+    vartitulo = "Atualizar_usuario"
+    return render_template("area_do_usuario.html", titulo=vartitulo, usuario = usuario_db)
+
 @app.route('/perfil_produtor', methods=['GET','POST'])
 def perfil_produtor():
     dao = Perfil_ProdutorDAO(get_db())
@@ -342,9 +375,18 @@ def visualizar_perfil():
     dao = Perfil_ProdutorDAO(get_db())
     informacoes_usuario = session.get('logado')
     codigo = informacoes_usuario['codigo']
-    print(codigo)
-    perfil_produtor_db = dao.visualizar_perfil(codigo)
-    return render_template("visualizar_perfil.html", perfil_produtor=perfil_produtor_db)
+    tipo = informacoes_usuario['tipo']
+
+    if tipo == "Produtor":
+        perfil_produtor_db = dao.visualizar_perfil(codigo)
+        perfil = perfil_produtor_db
+        print(perfil_produtor)
+    else:
+        perfil_produtor_db = dao.visualizar_perfil(None)
+        perfil = perfil_produtor_db[0]
+        perfil = list(perfil)
+        print(perfil)
+    return render_template("visualizar_perfil.html", perfil_produtor=perfil, tipo=tipo)
 
 
 

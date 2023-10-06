@@ -72,12 +72,12 @@ class UsuarioDAO():
     def Atualizar(self, usuario):
         try:
             sql = "UPDATE Usuario " \
-                  "SET cpf=%s, nome=%s, " \
-                  "dt_nasc=%s, peso=%s, tipo_sanguineo=%s, cep=%s, cidade=%s, email=%s, senha=%s, telefone=%s, opcao_doacao=%s" \
+                  "SET nome=%s, email=%s, " \
+                  "senha=%s, endereco=%s, tipo=%s, contato=%s " \
                   "WHERE codigo=%s"
 
             cursor = self.con.cursor()
-            cursor.execute(sql, (usuario.cpf, usuario.nome, usuario.dt_nasc, usuario.peso, usuario.tipo_sanguineo, usuario.cep, usuario.cidade, usuario.email, usuario.senha, usuario.telefone, usuario.opcao_doacao, usuario.codigo))
+            cursor.execute(sql, (usuario.nome, usuario.email, usuario.senha, usuario.endereco, usuario.tipo, usuario.contato, usuario.codigo))
             self.con.commit()
             return cursor.rowcount
 

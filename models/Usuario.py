@@ -1,5 +1,5 @@
 class Usuario():
-    def __init__(self, nome, email, senha, endereco, tipo, nivel, contato, estado_login, perfil_produtor_codigo=''):
+    def __init__(self, nome, email, senha, endereco, tipo, nivel, contato, estado_login="", perfil_produtor_codigo=''):
         self.codigo = 0
         self.nome = nome
         self.email = email

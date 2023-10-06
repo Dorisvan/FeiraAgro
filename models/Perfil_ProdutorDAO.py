@@ -42,15 +42,26 @@ class Perfil_ProdutorDAO():
 
     def visualizar_perfil(self, codigo):
         cursor = self.con.cursor()
+        print(codigo)
         try:
-            sql = "SELECT p.codigo, p.descricao_producao, p.local_venda, p.img0, p.img1, p.img2, p.img3, p.Usuario_codigo, u.nome, u.email, u.endereco, u.contato " \
-                  "FROM Perfil_Produtor as p, Usuario as u " \
-                  "WHERE p.Usuario_codigo = u.codigo AND u.codigo = %s"
+            if codigo == None:
+                sql = "SELECT p.codigo, p.descricao_producao, p.local_venda, p.img0, p.img1, p.img2, p.img3, p.Usuario_codigo, u.nome, u.email, u.endereco, u.contato " \
+                      "FROM Perfil_Produtor as p, Usuario as u " \
+                      "WHERE p.Usuario_codigo = u.codigo"
 
-            cursor.execute(sql, (codigo, ))
-            perfil = cursor.fetchone()
-            print(perfil)
-            return perfil
+                cursor.execute(sql)
+                perfil = cursor.fetchall()
+                return perfil
+
+            else:
+                sql = "SELECT p.codigo, p.descricao_producao, p.local_venda, p.img0, p.img1, p.img2, p.img3, p.Usuario_codigo, u.nome, u.email, u.endereco, u.contato " \
+                      "FROM Perfil_Produtor as p, Usuario as u " \
+                      "WHERE p.Usuario_codigo = u.codigo AND u.codigo = %s"
+
+                cursor.execute(sql, (codigo,))
+                perfil = cursor.fetchone()
+                return perfil
+
         except:
             print("gg")
 
