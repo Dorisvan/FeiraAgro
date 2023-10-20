@@ -46,7 +46,8 @@ app.auth = {
     'painel': {0:1, 1:1},
     'logout': {0:1, 1:1},
     'perfil_produtor': {0:1, 1:1},
-    'visualizar_perfil': {0:1, 1:1}
+    'visualizar_perfil': {0:1, 1:1},
+    'area_do_usuario': {0:1, 1:1}
 
 }
 
@@ -288,6 +289,26 @@ def cadastrar_produto():
     #produtos_db = daoProduto.Listar(produto_codigo, "Checagem_individual")
 
     return render_template("cadastrar_produto.html", titulo="Cadastrar_Produto")
+
+
+@app.route('/visualizar_produtos, <codigo_produtor>',  methods=['GET', 'POST'])
+def visualizar_produtos(codigo_produtor):
+    dao = ProdutoDAO(get_db())
+    print(codigo_produtor)
+
+    if codigo_produtor == "None":
+        produtos = dao.Visualizar(None)
+        produtos = list(produtos)
+        produtos_db = produtos
+        tipo = "todos"
+        print(produtos_db)
+    else:
+        produtos = dao.Visualizar(codigo_produtor)
+        produtos = produtos[0]
+        produtos_db = list(produtos)
+        tipo = "individual"
+    return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo)
+
 
 
 @app.route('/area_do_usuario', methods=['GET','POST'])

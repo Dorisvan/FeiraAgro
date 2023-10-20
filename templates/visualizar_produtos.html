@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 {% block tudo %}
 
-{% if tipo == "Produtor" %}
+{% if tipo == "todos" %}
     <section id="appointment" class="appointment section-bg" style="position: relative; height: 600px;">
 
 
@@ -11,8 +11,8 @@
             <div class="container position-relative">
               <div class="row d-flex justify-content-center">
                 <div class="col-lg-6 text-center">
-                  <h2>Perfil</h2>
-                  <p>Perfil do produtor</p>
+                  <h2>Área de produtos</h2>
+                  <p>Produtos do produtor</p>
                 </div>
               </div>
             </div>
@@ -21,7 +21,7 @@
             <div class="container">
               <ol>
                 <li><a href="index.html">Home</a></li>
-                <li>Perfil</li>
+                <li>Produtos</li>
               </ol>
             </div>
           </nav>
@@ -38,8 +38,8 @@
 
                   <div class="col-lg-8">
 
-                    {% if perfil_produtor %}
-                          <h2>Perfil {{ perfil_produtor[8] }}</h2>
+                    {% if produtos %}
+                      {% for item in produtos %}
 
                         <div class="reply-form">
 
@@ -47,51 +47,53 @@
                           <tbody>
                               <tr>
                                 <td>Nome</td>
-                                <td>{{ perfil_produtor[8] }}</td>
+                                <td>{{ item[1] }}</td>
                               </tr>
                               <tr>
-                                <td>Descrição do Produto</td>
-                                <td>{{ perfil_produtor[1] }}</td>
+                                <td>Quantidade</td>
+                                <td>{{ item[2] }}</td>
                               </tr>
                               <tr>
-                                <td>Local de Venda</td>
-                                <td>{{ perfil_produtor[2] }}</td>
+                                <td>Valor</td>
+                                <td>{{ item[3] }}</td>
                               </tr>
                                <tr>
-                                <td>Imagem 1</td>
-                                <td>{{ perfil_produtor[3] }}</td>
+                                <td>Classificação</td>
+                                <td>{{ item[4] }}</td>
                               </tr>
                               <tr>
-                                <td>Imagem 2</td>
-                                <td>{{ perfil_produtor[4] }}</td>
+                                <td>Procedência</td>
+                                <td>{{ item[5] }}</td>
                               </tr>
                               <tr>
-                                <td>Imagem 3</td>
-                                <td>{{ perfil_produtor[5] }}</td>
+                                <td>Imagem</td>
+                                <td>{{ item[6] }}</td>
                               </tr>
                               <tr>
-                                <td>Imagem 4</td>
-                                <td>{{ perfil_produtor[6] }}</td>
+                                <td>Descrição</td>
+                                <td>{{ item[7] }}</td>
                               </tr>
                               <tr>
-                                <td>Codigo do produtor</td>
-                                <td>{{ perfil_produtor[7] }}</td>
+                                <td>Código do produtor</td>
+                                <td>{{ item[8] }}</td>
                               </tr>
                               <tr>
-                                <td>Email</td>
-                                <td>{{ perfil_produtor[9] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Endereço</td>
-                                <td>{{ perfil_produtor[10] }}</td>
+                                <td>Nome do produtor</td>
+                                <td>{{ item[9] }}</td>
                               </tr>
                               <tr>
                                 <td>Contato</td>
-                                <td>{{ perfil_produtor[11] }}</td>
+                                <td>{{ item[10] }}</td>
                               </tr>
                               <tr>
-                                  <td> <a href="{{ url_for('visualizar_produtos', codigo_produtor=perfil_produtor[7]) }}">Visualizar seus produtos</a></td>
+                                <td>Endereço</td>
+                                <td>{{ item[11] }}</td>
                               </tr>
+                              <tr>
+                                <td>Local de venda</td>
+                                <td>{{ item[12] }}</td>
+                              </tr>
+                          {% endfor %}
                     {% else %}
                          <p>Nenhum item foi encontrado</p>
                     {% endif %}
@@ -115,8 +117,8 @@
             <div class="container position-relative">
               <div class="row d-flex justify-content-center">
                 <div class="col-lg-6 text-center">
-                  <h2>Perfil</h2>
-                  <p>Perfil do produtor</p>
+                  <h2>Área de produtos</h2>
+                  <p>Produtos do produtor</p>
                 </div>
               </div>
             </div>
@@ -125,7 +127,7 @@
             <div class="container">
               <ol>
                 <li><a href="index.html">Home</a></li>
-                <li>Perfil</li>
+                <li>Produtos</li>
               </ol>
             </div>
           </nav>
@@ -142,9 +144,8 @@
 
                   <div class="col-lg-8">
 
-                    {% if perfil_produtor %}
-                      {% for p in perfil_produtor %}
-                          <h2>Perfil {{ p[8] }}</h2>
+                    {% if produtos %}
+                          <h2>Código: {{ produtos[0] }}</h2>
 
                         <div class="reply-form">
 
@@ -152,45 +153,52 @@
                           <tbody>
                               <tr>
                                 <td>Nome</td>
-                                <td>{{ p[8] }}</td>
+                                <td>{{ produtos[1] }}</td>
                               </tr>
                               <tr>
-                                <td>Descrição do Produto</td>
-                                <td>{{ p[1] }}</td>
+                                <td>Quantidade</td>
+                                <td>{{ produtos[2] }}</td>
                               </tr>
                               <tr>
-                                <td>Local de Venda</td>
-                                <td>{{ p[2] }}</td>
+                                <td>Valor</td>
+                                <td>{{ produtos[3] }}</td>
                               </tr>
                                <tr>
-                                <td>Imagem</td>
-                                <td>{{ p[3] }}</td>
+                                <td>Classificação</td>
+                                <td>{{ produtos[4] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Procedência</td>
+                                <td>{{ produtos[5] }}</td>
                               </tr>
                               <tr>
                                 <td>Imagem</td>
-                                <td>{{ p[4] }}</td>
+                                <td>{{ produtos[6] }}</td>
                               </tr>
                               <tr>
-                                <td>Imagem</td>
-                                <td>{{ p[5] }}</td>
+                                <td>Descrição</td>
+                                <td>{{ produtos[7] }}</td>
                               </tr>
                               <tr>
-                                <td>Imagem</td>
-                                <td>{{ p[6] }}</td>
+                                <td>Código do produtor</td>
+                                <td>{{ produtos[8] }}</td>
                               </tr>
                               <tr>
-                                <td>Email</td>
-                                <td>{{ p[9] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Endereço</td>
-                                <td>{{ p[10] }}</td>
+                                <td>Nome do produtor</td>
+                                <td>{{ produtos[9] }}</td>
                               </tr>
                               <tr>
                                 <td>Contato</td>
-                                <td>{{ p[11] }}</td>
+                                <td>{{ produtos[10] }}</td>
                               </tr>
-                        {% endfor %}
+                              <tr>
+                                <td>Endereço</td>
+                                <td>{{ produtos[11] }}</td>
+                              </tr>
+                              <tr>
+                                <td>Local de venda</td>
+                                <td>{{ produtos[12] }}</td>
+                              </tr>
                     {% else %}
                          <p>Nenhum item foi encontrado</p>
                     {% endif %}
@@ -201,6 +209,8 @@
 
 
           <div class="section-title"></div>
+
+    </section>
 {% endif %}
 
 {% endblock tudo %}

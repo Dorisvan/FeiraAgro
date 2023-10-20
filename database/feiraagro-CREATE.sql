@@ -59,8 +59,9 @@ ENGINE = InnoDB;
 -- Table `feiraagro`.`Pedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `feiraagro`.`Pedido` (
-  `codigo` BIGINT NOT NULL,
+  `codigo` BIGINT NOT NULL AUTO_INCREMENT,
   `data` DATE NOT NULL,
+  `quantidade` INT NOT NULL,
   `situacao` VARCHAR(50) NOT NULL,
   `modo_entrega` VARCHAR(50) NOT NULL,
   `Usuario_codigo` BIGINT NOT NULL,
@@ -85,7 +86,7 @@ ENGINE = InnoDB;
 -- Table `feiraagro`.`Perfil_Produtor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `feiraagro`.`Perfil_Produtor` (
-  `codigo` BIGINT NOT NULL,
+  `codigo` BIGINT NOT NULL AUTO_INCREMENT,
   `descricao_producao` VARCHAR(500) NULL,
   `local_venda` VARCHAR(70) NULL,
   `img0` VARCHAR(50) NULL,

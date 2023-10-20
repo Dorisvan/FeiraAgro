@@ -4,7 +4,7 @@ class Perfil_ProdutorDAO():
 
     def Inserir(self, perfil):
         try:
-            sql = "INSERT INTO perfil_produtor(descricao_producao, local_venda, img0, img1, img2, img3, Usuario_codigo) " \
+            sql = "INSERT INTO perfil_produtor(descricao_producao, local_venda, img0, img1, img2, img3, Usuario_codigo)" \
                   "VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
             cursor = self.con.cursor()

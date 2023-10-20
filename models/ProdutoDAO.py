@@ -16,3 +16,34 @@ class ProdutoDAO():
 
         except:
             return 0
+
+
+    def Visualizar(self, codigo):
+        cursor = self.con.cursor()
+        print(codigo)
+        try:
+            if codigo == None:
+                sql = "SELECT DISTINCT p.codigo, p.nome, p.quantidade, p.valor, p.classificacao, p.procedencia, p.img_produto, p.descricao, p.Usuario_codigo as codigo_dono, u.nome as nome_do_produtor, u.contato, u.endereco, pf.local_venda " \
+                      "FROM Produto as p, Usuario as u, Perfil_produtor as pf " \
+                      "WHERE u.codigo = p.Usuario_codigo AND u.codigo = pf.Usuario_codigo " \
+                      "ORDER BY p.Usuario_codigo, p.nome"
+
+                cursor.execute(sql)
+                produtos = cursor.fetchall()
+                return produtos
+
+            else:
+                sql = "SELECT DISTINCT p.codigo, p.nome, p.quantidade, p.valor, p.classificacao, p.procedencia, p.img_produto, p.descricao, p.Usuario_codigo as codigo_dono, u.nome as nome_do_produtor, u.contato, u.endereco, pf.local_venda " \
+                      "FROM Produto as p, Usuario as u, Perfil_produtor as pf " \
+                      "WHERE u.codigo = p.Usuario_codigo AND u.codigo = pf.Usuario_codigo AND pf.Usuario_codigo = %s " \
+                      "ORDER BY p.Usuario_codigo, p.nome"
+
+                cursor.execute(sql, (codigo,))
+                produtos = cursor.fetchall()
+                return produtos
+        except:
+            return 0
+
+
+
+
