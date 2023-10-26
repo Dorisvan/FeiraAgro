@@ -6,6 +6,7 @@ import smtplib
 from flask import Flask, render_template, g, request, redirect, url_for, session, flash
 from email.message import EmailMessage
 from datetime import date
+from werkzeug.utils import secure_filename
 import datetime
 
 
@@ -47,7 +48,9 @@ app.auth = {
     'logout': {0:1, 1:1},
     'perfil_produtor': {0:1, 1:1},
     'visualizar_perfil': {0:1, 1:1},
-    'area_do_usuario': {0:1, 1:1}
+    'area_do_usuario': {0:1, 1:1},
+    'cadastrar_produto': {0:1, 1:1},
+    'listar_perfis': {0:1, 1:1}
 
 }
 
@@ -92,19 +95,28 @@ def close_connection(exception):
 
 # Páginas simples
 
-@app.route('/')
-def index():
+
+@app.route('/verificar_login')
+def verificar_login():
     try:
         informacoes_usuario = session.get('logado')
         estado_login = informacoes_usuario['estado_login']
     except:
-        estado_login = 0
-    return render_template("index.html", estado_login = estado_login)
+        estado_login = "Logout"
+
+    return estado_login
+
+
+@app.route('/')
+def index():
+    resultado_login = verificar_login()
+    return render_template("index.html", estado_login = resultado_login)
 
 
 @app.route('/painel')
 def painel():
-    return render_template("painel.html", titulo="Painel")
+    resultado_login = verificar_login()
+    return render_template("painel.html", titulo="Painel", estado_login=resultado_login)
 
 
 # Funções de Cadastro/Login/Logout
@@ -112,6 +124,8 @@ def painel():
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro():
+    resultado_login = verificar_login()
+
     if request.method == 'POST':
         nome = request.form['nome']
         email = request.form['email']
@@ -134,7 +148,7 @@ def cadastro():
             flash("Erro ao cadastrar!", "danger")
 
     vartitulo = "Cadastro"
-    return render_template("cadastro.html", titulo=vartitulo)
+    return render_template("cadastro.html", titulo=vartitulo, estado_login=resultado_login)
 
 
 @app.route('/login', methods = ['GET', 'POST'])
@@ -255,6 +269,47 @@ def logout():
 
 # Função de notificação
 
+@app.route('/baixar_arquivo, <codigo>, <arquivo>, <nome>, <tipo>, <classificacao>')
+def baixar_arquivo(codigo, imagem, tipo, classificacao, nome):
+    try:
+        os.mkdir("perfis/"+str(codigo))
+        os.mkdir("perfis/" + str(codigo) +"/produtos")
+        os.mkdir("perfis/" + str(codigo) + "/perfil_usuario")
+        os.mkdir("perfis/" + str(codigo) + "/perfil_produtor")
+    except:
+        pass
+
+    pasta_upload_produtos = os.path.join(os.getcwd(), "perfis/" + str(codigo) + "/produtos")
+    pasta_upload_perfil_usuario = os.path.join(os.getcwd(), "perfis/" + str(codigo) + "/perfil_usuario")
+    pasta_upload_perfil_produtor = os.path.join(os.getcwd(), "perfis/" + str(codigo) + "/perfil_produtor")
+
+    if classificacao == "criacao":
+        if tipo == "produtos":
+            arquivo = os.path.join(pasta_upload_produtos, secure_filename(imagem.filename))
+            imagem.save(arquivo)
+        elif tipo == "perfil_usuario":
+            arquivo = os.path.join(pasta_upload_perfil_usuario, secure_filename(imagem.filename))
+            imagem.save(arquivo)
+        elif tipo == "perfil_produtor":
+            arquivo = os.path.join(pasta_upload_perfil_produtor, secure_filename(imagem.filename))
+            imagem.save(arquivo)
+        else:
+            print("Erro ao executar função de baixar arquivos")
+    else:
+        if tipo == "produtos":
+            os.remove(pasta_upload_produtos + nome)
+            arquivo = os.path.join(pasta_upload_produtos, secure_filename(imagem.filename))
+            imagem.save(arquivo)
+        elif tipo == "perfil_usuario":
+            os.remove(pasta_upload_perfil_usuario + nome)
+            arquivo = os.path.join(pasta_upload_perfil_usuario, secure_filename(imagem.filename))
+            imagem.save(arquivo)
+        elif tipo == "perfil_produtor":
+            os.remove(pasta_upload_perfil_produtor + nome)
+            arquivo = os.path.join(pasta_upload_perfil_produtor, secure_filename(imagem.filename))
+            imagem.save(arquivo)
+        else:
+            print("Erro ao executar função de baixar arquivos")
 
 
 
@@ -262,6 +317,8 @@ def logout():
 
 @app.route('/cadastrar_produto',  methods=['GET', 'POST'])
 def cadastrar_produto():
+    resultado_login = verificar_login()
+
     daoUsuario = UsuarioDAO(get_db())
     informacoes_usuario = session.get('logado')
     usuario_nivel = informacoes_usuario['nivel']
@@ -273,10 +330,13 @@ def cadastrar_produto():
         valor = request.form['valor']
         classificacao = request.form['classificacao']
         procedencia = request.form['procedencia']
-        img_produto = request.form['img_produto']
         descricao = request.form['descricao']
+        imagem_produto = request.files['img_produto']
+        nome_imagem = imagem_produto.filename
 
-        produto = Produto(nome, quantidade, valor, classificacao, procedencia, usuario_codigo, img_produto, descricao)
+        baixar_arquivo(usuario_codigo, imagem_produto, "produtos", "criacao", nome_imagem)
+
+        produto = Produto(nome, quantidade, valor, classificacao, procedencia, usuario_codigo, nome_imagem, descricao)
 
         dao = ProdutoDAO(get_db())
         codigo = dao.Inserir(produto)
@@ -288,11 +348,13 @@ def cadastrar_produto():
 
     #produtos_db = daoProduto.Listar(produto_codigo, "Checagem_individual")
 
-    return render_template("cadastrar_produto.html", titulo="Cadastrar_Produto")
+    return render_template("cadastrar_produto.html", titulo="Cadastrar_Produto", estado_login=resultado_login)
 
 
 @app.route('/visualizar_produtos, <codigo_produtor>',  methods=['GET', 'POST'])
 def visualizar_produtos(codigo_produtor):
+    resultado_login = verificar_login()
+
     dao = ProdutoDAO(get_db())
     print(codigo_produtor)
 
@@ -307,12 +369,14 @@ def visualizar_produtos(codigo_produtor):
         produtos = produtos[0]
         produtos_db = list(produtos)
         tipo = "individual"
-    return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo)
+    return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo, estado_login=resultado_login)
 
 
 
 @app.route('/area_do_usuario', methods=['GET','POST'])
 def area_do_usuario():
+    resultado_login = verificar_login()
+
     dao = UsuarioDAO(get_db())
 
     informacoes_usuario = session.get('logado')
@@ -341,10 +405,12 @@ def area_do_usuario():
 
     usuario_db = dao.Listar(usuario_codigo, "Checagem_individual")
     vartitulo = "Atualizar_usuario"
-    return render_template("area_do_usuario.html", titulo=vartitulo, usuario = usuario_db)
+    return render_template("area_do_usuario.html", titulo=vartitulo, usuario = usuario_db, estado_login=resultado_login)
 
 @app.route('/perfil_produtor', methods=['GET','POST'])
 def perfil_produtor():
+    resultado_login = verificar_login()
+
     dao = Perfil_ProdutorDAO(get_db())
     informacoes_usuario = session.get('logado')
     usuario_codigo = informacoes_usuario['codigo']
@@ -360,7 +426,7 @@ def perfil_produtor():
     if usuario_tipo == "Produtor":
         if resultado_busca == "Criado":
             vartitulo = "Visualizar-Perfil"
-            visualizar_perfil()
+            resultado = visualizar_perfil()
 
         else:
             vartitulo = "Cadastrar-Perfil"
@@ -381,18 +447,22 @@ def perfil_produtor():
     else:
         pass
 
-    return render_template("perfil_produtor.html", titulo=vartitulo, variavel_condicional=variavel_condicional )
+    return render_template("perfil_produtor.html", titulo=vartitulo, variavel_condicional=variavel_condicional, estado_login=resultado_login)
 
 
 @app.route('/listar_perfis', methods=['GET','POST'])
 def listar_perfis():
+    resultado_login = verificar_login()
+
     dao = Perfil_ProdutorDAO(get_db())
     perfil_produtor_db = dao.listar()
-    return render_template("listar_item.html", perfil_produtor=perfil_produtor_db)
+    return render_template("listar_item.html", perfil_produtor=perfil_produtor_db, estado_login=resultado_login)
 
 
 @app.route('/visualizar_perfil', methods=['GET', 'POST'])
 def visualizar_perfil():
+    resultado_login = verificar_login()
+
     dao = Perfil_ProdutorDAO(get_db())
     informacoes_usuario = session.get('logado')
     codigo = informacoes_usuario['codigo']
@@ -407,7 +477,7 @@ def visualizar_perfil():
         perfil = perfil_produtor_db[0]
         perfil = list(perfil)
         print(perfil)
-    return render_template("visualizar_perfil.html", perfil_produtor=perfil, tipo=tipo)
+    return render_template("visualizar_perfil.html", perfil_produtor=perfil, tipo=tipo, estado_login=resultado_login)
 
 
 
@@ -667,17 +737,6 @@ def excluir_solicitacao(codigo):
     return redirect(url_for('listar_solicitacoes'))
 
 
-@app.route('/excluir_usuario/<codigo>', methods=['GET',])
-def excluir_usuario(codigo):
-    dao = UsuarioDAO(get_db())
-    ret = dao.Excluir(codigo)
-    if ret == 1:
-        flash(f"Conta excluída com sucesso!", "success")
-    else:
-        flash(f"Erro ao excluir Conta.", "danger")
-    return redirect(url_for('logout'))
-
-
 @app.route('/excluir_doenca/<codigo>', methods=['GET',])
 def excluir_doenca(codigo):
     dao = UsuarioDoencaDAO(get_db())
@@ -797,6 +856,16 @@ def solicitacoes_busca():
     # solicitacoes_usuario = dao.Busca_avancada(termo, usuario_codigo, 'Individual')
     solicitacoes_usuario = dao.Listar_Solicitacoes(usuario_codigo, "Individual")
     return render_template("solicitacoes.html", solicitacoes=solicitacoes_db, solicitacoes_usuario = solicitacoes_usuario)
+
+@app.route('/excluir_usuario/<codigo>', methods=['GET',])
+def excluir_usuario(codigo):
+    dao = UsuarioDAO(get_db())
+    ret = dao.Excluir(codigo)
+    if ret == 1:
+        flash(f"Conta excluída com sucesso!", "success")
+    else:
+        flash(f"Erro ao excluir Conta.", "danger")
+    return redirect(url_for('logout'))
 
 
 # HOST

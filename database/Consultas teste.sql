@@ -43,3 +43,5 @@ SELECT DISTINCT p.codigo, p.nome, p.quantidade, p.valor, p.classificacao, p.proc
 FROM Produto as p, Usuario as u, Perfil_produtor as pf
 WHERE u.codigo = p.Usuario_codigo AND u.codigo = pf.Usuario_codigo AND pf.Usuario_codigo = 1
 ORDER BY p.Usuario_codigo, p.nome;
+
+DELETE FROM Usuario WHERE codigo = 1;
