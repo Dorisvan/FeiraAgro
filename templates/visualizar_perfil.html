@@ -143,8 +143,8 @@
                   <div class="col-lg-8">
 
                     {% if perfil_produtor %}
-                      {% for p in perfil_produtor %}
-                          <h2>Perfil {{ p[8] }}</h2>
+<!--                      {% for p in perfil_produtor %}-->
+                          <h2>Perfil {{ perfil_produtor[8] }}</h2>
 
                         <div class="reply-form">
 
@@ -152,45 +152,45 @@
                           <tbody>
                               <tr>
                                 <td>Nome</td>
-                                <td>{{ p[8] }}</td>
+                                <td>{{ perfil_produtor[8] }}</td>
                               </tr>
                               <tr>
                                 <td>Descrição do Produto</td>
-                                <td>{{ p[1] }}</td>
+                                <td>{{ perfil_produtor[1] }}</td>
                               </tr>
                               <tr>
                                 <td>Local de Venda</td>
-                                <td>{{ p[2] }}</td>
+                                <td>{{ perfil_produtor[2] }}</td>
                               </tr>
                                <tr>
                                 <td>Imagem</td>
-                                <td>{{ p[3] }}</td>
+                                <td>{{ perfil_produtor[3] }}</td>
                               </tr>
                               <tr>
                                 <td>Imagem</td>
-                                <td>{{ p[4] }}</td>
+                                <td>{{ perfil_produtor[4] }}</td>
                               </tr>
                               <tr>
                                 <td>Imagem</td>
-                                <td>{{ p[5] }}</td>
+                                <td>{{ perfil_produtor[5] }}</td>
                               </tr>
                               <tr>
                                 <td>Imagem</td>
-                                <td>{{ p[6] }}</td>
+                                <td>{{ perfil_produtor[6] }}</td>
                               </tr>
                               <tr>
                                 <td>Email</td>
-                                <td>{{ p[9] }}</td>
+                                <td>{{ perfil_produtor[9] }}</td>
                               </tr>
                               <tr>
                                 <td>Endereço</td>
-                                <td>{{ p[10] }}</td>
+                                <td>{{ perfil_produtor[10] }}</td>
                               </tr>
                               <tr>
                                 <td>Contato</td>
-                                <td>{{ p[11] }}</td>
+                                <td>{{ perfil_produtor[11] }}</td>
                               </tr>
-                        {% endfor %}
+<!--                        {% endfor %}-->
                     {% else %}
                          <p>Nenhum item foi encontrado</p>
                     {% endif %}

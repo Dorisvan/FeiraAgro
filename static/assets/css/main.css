@@ -19,9 +19,9 @@
 
 /* Colors */
 :root {
-  --color-default: #222222;
-  --color-primary: #99d98c;
-  --color-secondary: #f85a40;
+  --color-default: #152026;
+  --color-primary: #26A65D;
+  --color-secondary: #F24405;
 }
 
 /* Smooth scroll behavior */
@@ -2715,6 +2715,17 @@ section {
 .div_externa_form_cadastro{
     height: relative;
     width: 800px;
+    padding: 20px 30px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    background-color: #fff;
+}
+
+.div_externa_form_visualizar_produto{
+    height: relative;
+    width: relative;
     padding: 20px 30px;
     text-align: center;
     border-radius: 10px;

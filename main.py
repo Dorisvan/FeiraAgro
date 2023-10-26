@@ -355,6 +355,9 @@ def cadastrar_produto():
 def visualizar_produtos(codigo_produtor):
     resultado_login = verificar_login()
 
+    informacoes_usuario = session.get('logado')
+    usuario_codigo = informacoes_usuario['codigo']
+
     dao = ProdutoDAO(get_db())
     print(codigo_produtor)
 
@@ -369,7 +372,35 @@ def visualizar_produtos(codigo_produtor):
         produtos = produtos[0]
         produtos_db = list(produtos)
         tipo = "individual"
-    return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo, estado_login=resultado_login)
+    return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo, usuario_codigo=usuario_codigo, estado_login=resultado_login)
+
+
+
+@app.route('/cadastrar_pedido, <codigo_produto>, <codigo_usuario>', methods=['GET','POST'])
+def cadastrar_pedido(codigo_produto, codigo_usuario):
+    resultado_login = verificar_login()
+
+    dao1 = PedidoDAO(get_db())
+    dao2 = ProdutoDAO(get_db())
+
+    if request.method == "POST":
+        situacao = "Não entregue"
+        data_pedido = date.today()
+        data_entrega = request.form['data_entrega']
+        modo_entrega = request.form['modo_entrega']
+        quantidade = request.form['quantidade']
+
+        pedido = Pedido(data_pedido, data_entrega, quantidade, situacao, modo_entrega, codigo_usuario, codigo_produto)
+        dao1.Inserir(pedido)
+    else: 
+        pass
+
+    return render_template("cadastrar_pedido.html", estado_login=resultado_login)
+
+
+
+
+
 
 
 

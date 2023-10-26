@@ -60,7 +60,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `feiraagro`.`Pedido` (
   `codigo` BIGINT NOT NULL AUTO_INCREMENT,
-  `data` DATE NOT NULL,
+  `data_pedido` DATE NOT NULL,
+  `data_entrega` DATE NOT NULL,
   `quantidade` INT NOT NULL,
   `situacao` VARCHAR(50) NOT NULL,
   `modo_entrega` VARCHAR(50) NOT NULL,
