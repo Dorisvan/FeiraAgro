@@ -25,7 +25,6 @@ class UsuarioDAO():
         try:
             cursor = self.con.cursor()
             if tipo == "Checagem_individual":
-                # pegar somente uma planta
                 sql = "SELECT * FROM Usuario WHERE codigo=%s"
                 cursor.execute(sql, (codigo,))
                 usuario = cursor.fetchone()
@@ -38,7 +37,6 @@ class UsuarioDAO():
                 return usuario
 
             else:
-                # pegar todas as plantas
                 sql = "SELECT * FROM Usuario"
                 cursor.execute(sql)
                 usuarios = cursor.fetchall()

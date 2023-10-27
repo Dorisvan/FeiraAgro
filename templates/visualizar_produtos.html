@@ -8,7 +8,7 @@
 <!--          <div class="container" data-aos="fade-up" data-aos-delay="100">-->
 
 <section id="appointment" class="appointment section-bg" style="position: relative;">
-      <div class="container">
+      <div class="container" style="height: 50vh;">
         <div class="div_externa_form_visualizar_produto">
 
             <table class="table">
@@ -77,61 +77,64 @@
                   <div class="col-lg-8">
 
                     {% if produtos %}
-                          <h2>Código: {{ produtos[0] }}</h2>
+                      {% for item in produtos %}
 
                         <div class="reply-form">
 
                         <table class="table">
                           <tbody>
+                              <h2>Código do Produto: {{ item[0] }}</h2>
                               <tr>
                                 <td>Nome</td>
-                                <td>{{ produtos[1] }}</td>
+                                <td>{{ item[1] }}</td>
                               </tr>
                               <tr>
                                 <td>Quantidade</td>
-                                <td>{{ produtos[2] }}</td>
+                                <td>{{ item[2] }}</td>
                               </tr>
                               <tr>
                                 <td>Valor</td>
-                                <td>{{ produtos[3] }}</td>
+                                <td>{{ item[3] }}</td>
                               </tr>
                                <tr>
                                 <td>Classificação</td>
-                                <td>{{ produtos[4] }}</td>
+                                <td>{{ item[4] }}</td>
                               </tr>
                               <tr>
                                 <td>Procedência</td>
-                                <td>{{ produtos[5] }}</td>
+                                <td>{{ item[5] }}</td>
                               </tr>
                               <tr>
                                 <td>Imagem</td>
-                                <td>{{ produtos[6] }}</td>
+                                <td>{{ item[6] }}</td>
                               </tr>
                               <tr>
                                 <td>Descrição</td>
-                                <td>{{ produtos[7] }}</td>
+                                <td>{{ item[7] }}</td>
                               </tr>
                               <tr>
                                 <td>Código do produtor</td>
-                                <td>{{ produtos[8] }}</td>
+                                <td>{{ item[8] }}</td>
                               </tr>
                               <tr>
                                 <td>Nome do produtor</td>
-                                <td>{{ produtos[9] }}</td>
+                                <td>{{ item[9] }}</td>
                               </tr>
                               <tr>
                                 <td>Contato</td>
-                                <td>{{ produtos[10] }}</td>
+                                <td>{{ item[10] }}</td>
                               </tr>
                               <tr>
                                 <td>Endereço</td>
-                                <td>{{ produtos[11] }}</td>
+                                <td>{{ item[11] }}</td>
                               </tr>
                               <tr>
                                 <td>Local de venda</td>
-                                <td>{{ produtos[12] }}</td>
+                                <td>{{ item[12] }}</td>
                               </tr>
                               <a></a>
+                              <br>
+                      {% endfor %}
                     {% else %}
                          <p>Nenhum item foi encontrado</p>
                     {% endif %}
@@ -145,61 +148,61 @@
 
     </section>
 
-<br>
-<br>
-<br>
-<br>
-<br>
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<br>-->
 
-  <div class="section-header">
-      <h2>Lista de Produtos</h2>
-  </div>
+<!--  <div class="section-header">-->
+<!--      <h2>Lista de Produtos</h2>-->
+<!--  </div>-->
 
-  <div class="div_externa_form_visualizar_produto">
+<!--  <div class="div_externa_form_visualizar_produto">-->
 
-    <table class="table">
-      <thead>
-        <th style="color: #99d98c">Código</th>
-        <th style="color: #99d98c">Nome</th>
-        <th style="color: #99d98c">Quantidade</th>
-        <th style="color: #99d98c">Valor</th>
-        <th style="color: #99d98c">Classificação</th>
-        <th style="color: #99d98c">Procedência</th>
-        <th style="color: #99d98c">Imagem</th>
-        <th style="color: #99d98c">Descrição</th>
-        <th style="color: #99d98c">Código do Produtor</th>
-        <th style="color: #99d98c">Nome do Produtor</th>
-        <th style="color: #99d98c">Contato</th>
-        <th style="color: #99d98c">Endereço</th>
-        <th style="color: #99d98c">Local de Vendas</th>
-        <th style="color: #99d98c">Opções</th>
-      </thead>
-      <tbody>
-      {% if produtos %}
-        {% for item in produtos %}
-          <tr>
-            <td>{{ produtos[0] }}</td>
-            <td>{{ produtos[1] }}</td>
-            <td>{{ produtos[2] }}</td>
-            <td>{{ produtos[3] }}</td>
-            <td>{{ produtos[4] }}</td>
-            <td>{{ produtos[5] }}</td>
-            <td>{{ produtos[6] }}</td>
-            <td>{{ produtos[7] }}</td>
-            <td>{{ produtos[8] }}</td>
-            <td>{{ produtos[9] }}</td>
-            <td>{{ produtos[10] }}</td>
-            <td>{{ produtos[11] }}</td>
-            <td>{{ produtos[12] }}</td>
-              <td><a href="{{ url_for('cadastrar_pedido', codigo_produto=produtos[0]) }}">Adquirir produto</a></td>
-          </tr>
-        {% endfor %}
-      {% else %}
-        <p>Nenhum item foi encontrado</p>
-      {% endif %}
-      </tbody>
-    </table>
-  </div>
+<!--    <table class="table">-->
+<!--      <thead>-->
+<!--        <th style="color: #99d98c">Código</th>-->
+<!--        <th style="color: #99d98c">Nome</th>-->
+<!--        <th style="color: #99d98c">Quantidade</th>-->
+<!--        <th style="color: #99d98c">Valor</th>-->
+<!--        <th style="color: #99d98c">Classificação</th>-->
+<!--        <th style="color: #99d98c">Procedência</th>-->
+<!--        <th style="color: #99d98c">Imagem</th>-->
+<!--        <th style="color: #99d98c">Descrição</th>-->
+<!--        <th style="color: #99d98c">Código do Produtor</th>-->
+<!--        <th style="color: #99d98c">Nome do Produtor</th>-->
+<!--        <th style="color: #99d98c">Contato</th>-->
+<!--        <th style="color: #99d98c">Endereço</th>-->
+<!--        <th style="color: #99d98c">Local de Vendas</th>-->
+<!--        <th style="color: #99d98c">Opções</th>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      {% if produtos %}-->
+<!--        {% for item in produtos %}-->
+<!--          <tr>-->
+<!--            <td>{{ produtos[0] }}</td>-->
+<!--            <td>{{ produtos[1] }}</td>-->
+<!--            <td>{{ produtos[2] }}</td>-->
+<!--            <td>{{ produtos[3] }}</td>-->
+<!--            <td>{{ produtos[4] }}</td>-->
+<!--            <td>{{ produtos[5] }}</td>-->
+<!--            <td>{{ produtos[6] }}</td>-->
+<!--            <td>{{ produtos[7] }}</td>-->
+<!--            <td>{{ produtos[8] }}</td>-->
+<!--            <td>{{ produtos[9] }}</td>-->
+<!--            <td>{{ produtos[10] }}</td>-->
+<!--            <td>{{ produtos[11] }}</td>-->
+<!--            <td>{{ produtos[12] }}</td>-->
+<!--              <td><a href="{{ url_for('cadastrar_pedido', codigo_produto=produtos[0]) }}">Adquirir produto</a></td>-->
+<!--          </tr>-->
+<!--        {% endfor %}-->
+<!--      {% else %}-->
+<!--        <p>Nenhum item foi encontrado</p>-->
+<!--      {% endif %}-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--  </div>-->
 
 {% endif %}
 

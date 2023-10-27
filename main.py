@@ -403,7 +403,9 @@ def visualizar_produtos(codigo_produtor):
         tipo = "todos"
     else:
         produtos = dao.Visualizar(codigo_produtor)
-        produtos = produtos[0]
+        print(produtos)
+        produtos  = list(produtos)
+        print(produtos)
         produtos_db = list(produtos)
         tipo = "individual"
     return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo, usuario_codigo=usuario_codigo, estado_login=resultado_login)
