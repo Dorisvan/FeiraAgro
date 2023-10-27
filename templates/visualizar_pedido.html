@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block tudo %}
+
+{% if tipo == "Meus" %}
+
+<section id="appointment" class="appointment section-bg" style="position: relative;">
+      <div class="container">
+        <div class="div_externa_form_visualizar_produto">
+
+            <table class="table">
+
+                  <div class="col-lg-64">
+
+                        <div class="reply-form">
+
+                        <table class="table">
+
+                            <thead>
+                                <th>Código</th>
+                                <th>Data do Pedido</th>
+                                <th>Data da Entrega</th>
+                                <th>Quantidade</th>
+                                <th>Situação</th>
+                                <th>Modo de Entrega</th>
+                                <th>Código do Usuário</th>
+                                <th>Código do Produto</th>
+
+                            </thead>
+                            <tbody>
+                            {% if pedidos %}
+                                {% for item in pedidos %}
+
+                                  <tr>
+                                      <td>{{ item[0] }}</td>
+                                    <td>{{ item[1] }}</td>
+                                    <td>{{ item[2] }}</td>
+                                    <td>{{ item[3] }}</td>
+                                    <td>{{ item[4] }}</td>
+                                    <td>{{ item[5] }}</td>
+                                    <td>{{ item[6] }}</td>
+                                    <td>{{ item[7] }}</td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+                             <p>Nenhum item foi encontrado</p>
+                            {% endif %}
+                        </tbody>
+            </table>
+          </div>
+        </section>
+
+
+          <div class="section-title"></div>
+
+</section>
+{% else %}
+
+{% endif %}
+
+{% endblock %}

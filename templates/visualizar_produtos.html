@@ -2,32 +2,6 @@
 {% block tudo %}
 
 {% if tipo == "todos" %}
-    <section id="appointment" class="appointment section-bg" style="position: relative; height: 600px;">
-
-
-        <!-- ======= Breadcrumbs ======= -->
-        <div class="breadcrumbs">
-          <div class="page-header d-flex align-items-center" style="background-image: url('');">
-            <div class="container position-relative">
-              <div class="row d-flex justify-content-center">
-                <div class="col-lg-6 text-center">
-                  <h2>Área de produtos</h2>
-                  <p>Produtos do produtor</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <nav>
-            <div class="container">
-              <ol>
-                <li><a href="index.html">Home</a></li>
-                <li>Produtos</li>
-              </ol>
-            </div>
-          </nav>
-        </div><!-- End Breadcrumbs -->
-    </section>
-
 
        <!-- ======= Projet Details Section ======= -->
 <!--        <section id="project-details" class="project-details">-->
@@ -92,32 +66,6 @@
     </section>
 
 {% else %}
-<section id="appointment" class="appointment section-bg" style="position: relative; height: 600px;">
-
-
-        <!-- ======= Breadcrumbs ======= -->
-        <div class="breadcrumbs">
-          <div class="page-header d-flex align-items-center" style="background-image: url('');">
-            <div class="container position-relative">
-              <div class="row d-flex justify-content-center">
-                <div class="col-lg-6 text-center">
-                  <h2>Área de produtos</h2>
-                  <p>Produtos do produtor</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <nav>
-            <div class="container">
-              <ol>
-                <li><a href="index.html">Home</a></li>
-                <li>Produtos</li>
-              </ol>
-            </div>
-          </nav>
-        </div><!-- End Breadcrumbs -->
-    </section>
-
 
        <!-- ======= Projet Details Section ======= -->
         <section id="project-details" class="project-details">
@@ -243,7 +191,7 @@
             <td>{{ produtos[10] }}</td>
             <td>{{ produtos[11] }}</td>
             <td>{{ produtos[12] }}</td>
-              <td><a href="{{ url_for('cadastrar_pedido', codigo_produto=produtos[0], codigo_usuario=usuario_codigo) }}">Adquirir produto</a></td>
+              <td><a href="{{ url_for('cadastrar_pedido', codigo_produto=produtos[0]) }}">Adquirir produto</a></td>
           </tr>
         {% endfor %}
       {% else %}

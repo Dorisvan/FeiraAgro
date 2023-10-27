@@ -290,4 +290,13 @@ document.addEventListener('DOMContentLoaded', () => {
     aos_init();
   });
 
+  function mostrar_senha(){
+      var senha = document.getElement.ById("senha");
+      if(senha.type=='password'){
+        senha.type="text";
+      }else{
+        senha.type='password';
+      }
+  }
+
 });

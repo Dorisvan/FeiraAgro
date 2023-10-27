@@ -15,7 +15,7 @@
           <div class="section-title container">
             <br>
             <div class="section-header">
-              <h2>Cadastro</h2>
+              <h2>Cadastrar Pedido</h2>
             </div>
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
@@ -28,67 +28,41 @@
             {% endwith %}
           </div>
 
-          <form action="{{ url_for('cadastrar_pedido') }}" method="POST" >
+          <form action="{{ url_for('cadastrar_pedido', codigo_produto=produto[0]) }}" method="POST" >
             <div class="row">
               <div class="col-md-4 form-group container">
-                <label for="nome"></label>
-                <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome completo" required>
+                <label for="data_entrega"></label>
+                <input type="date" name="data_entrega" class="form-control" id="data_entrega" placeholder="Data de Entrega" required>
                 <div class="validate"></div>
               </div>
               <div class="col-md-4 form-group mt-3 mt-md-0 container">
-                <label for="email"></label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="example@gmail.com" required>
+                <label for="modo_entrega"></label>
+                <input type="text" class="form-control" name="modo_entrega" id="modo_entrega" placeholder="Forma de entrega" required>
                 <div class="validate"></div>
               </div>
             </div>
 
             <div class="row">
               <div class="col-md-4 form-group mt-3 container">
-                <label for="endereco"></label>
-                <input type="text" class="form-control" name="endereco" id="endereco" placeholder="Seu endereço (ex.: Bairro Lagoa Seca, Rua João Almeida, n° 50" required>
+                <label for="quantidade"></label>
+                <input type="number" class="form-control" name="quantidade" id="quantidade" placeholder="Quantidade de itens" required>
                 <div class="validate"></div>
               </div>
-              <div class="col-md-4 form-group mt-3 container">
-                <label for="contato"></label>
-                <input type="text" class="form-control" name="contato" id="contato" placeholder="Contato">
-                <div class="validate"></div>
-              </div>
+<!--              <div class="col-md-4 form-group mt-3 container">-->
+<!--                <label for="valor"></label>-->
+<!--                <input type="number" class="form-control" name="valor" id="valor" value=produto[3] required>-->
+<!--                <div class="validate"></div>-->
+<!--              </div>-->
             </div>
 
             <div class="row">
 
-            </div>
-
-            <div class="row">
-
-            </div>
-
-            <div class="row">
-              <div class="col-md-4 form-group mt-3 container">
-                  <label for="tipo"></label>
-                  <select name="tipo" required class="form-control">
-                  <option value="Não sei">Escolha se você é um produtor ou consumidor</option>
-                  <option value="Produtor">Produtor</option>
-                  <option value="Consumidor">Consumidor</option>
-                </select>
-                <div class="validate"></div>
-              </div>
-
-              <div class="col-md-4 form-group mt-3 container">
-                <label for="senha"></label>
-                <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha">
-                <div class="validate"></div>
-              </div>
             </div>
 
             <br>
 
             <div class="text-center">
-              <button class="botao-cadastro " type="submit">Cadastrar</button>
-              <a href="/login_google" class="botao-cadastro"><span class="d-none d-md-inline"></span>Entrar com o Google <ion-icon class="icon-google" name="logo-google"></ion-icon></a>
-            </div>
-            <br>
-            <a class="botao-cadastro" href="/login">Já possuo uma conta</a>
+              <button class="botao-cadastro " type="submit">Requisitar</button>
             <br>
           </form>
 

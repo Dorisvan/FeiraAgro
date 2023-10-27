@@ -3,25 +3,35 @@
 
 {% if variavel_condicional == "Não_criado" %}
 
-<!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
+    <section id="appointment" class="appointment section-bg" style="position: relative;">
+      <div class="container">
+        <div class="div_externa_form_cadastro container">
 
-        <div class="section-header">
-          <h2>Cadastrar Perfil do Produtor</h2>
-        </div>
+          <div class="section-title container">
+            <br>
+            <div class="section-header">
+              <h2>Cadastro de Produtor</h2>
+            </div>
+          </div>
 
-          <div class="col-lg-8">
-            <form action="{{ url_for('perfil_produtor') }}" method="POST" role="form" >
-              <div class="row">
+
+          <form action="{{ url_for('perfil_produtor') }}" method="POST",>
+            <div class="row">
+                <div class="form-group mt-3">
+                  <input type="text" class="form-control" name="local_venda" id="local_venda" placeholder="Local de venda">
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="form-group mt-3">
                   <textarea class="form-control" name="descricao_producao" rows="7" placeholder="Descreva de sua produção" ></textarea>
                 </div>
-                  <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="local_venda" id="local_venda" placeholder="Local de venda">
-                </div>
-              </div>
+            </div>
+
+            <div class="row">
               <div class="form-group mt-3">
+                  <strong>Escolha imagens de sua escolha para preencher seu perfil (Ex: Local de venda, safra, colheita...).</strong>
+                  <br>
                 <input type="file" class="form-control" name="img0" id="img0" placeholder="Primeira imagem">
                 <input type="file" class="form-control" name="img1" id="img1" placeholder="Segunda imagem">
               </div>
@@ -29,22 +39,67 @@
                 <input type="file" class="form-control" name="img2" id="img2" placeholder="Terceira imagem">
                 <input type="file" class="form-control" name="img3" id="img3" placeholder="Quarta imagem">
               </div>
+            </div>
 
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
+            <div class="row">
 
-                  <div class="text-center floatleft"><button type="submit">Cadastrar</button></div>
+            </div>
 
-            </form>
-          </div><!-- End Contact Form -->
+            <br>
+
+            <div class="text-center">
+              <button class="botao-cadastro " type="submit">Enviar</button>
+            </div>
+            <br>
+          </form>
 
         </div>
 
-      </div>
-    </section><!-- End Contact Section -->
+      <div class="section-title"></div>
+    </section><!-- End Appointment Section -->
+
+<!--&lt;!&ndash; ======= Contact Section ======= &ndash;&gt;-->
+<!--    <section id="contact" class="contact">-->
+<!--      <div class="container" data-aos="fade-up">-->
+
+<!--        <div class="section-header">-->
+<!--          <h2>Cadastrar Perfil do Produtor</h2>-->
+<!--        </div>-->
+
+<!--          <div class="col-lg-8">-->
+<!--            <form action="{{ url_for('perfil_produtor') }}" method="POST" role="form" >-->
+<!--              <div class="row">-->
+<!--                <div class="form-group mt-3">-->
+<!--                  <textarea class="form-control" name="descricao_producao" rows="7" placeholder="Descreva de sua produção" ></textarea>-->
+<!--                </div>-->
+<!--                  <div class="form-group mt-3">-->
+<!--                  <input type="text" class="form-control" name="local_venda" id="local_venda" placeholder="Local de venda">-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="form-group mt-3">-->
+<!--                <input type="file" class="form-control" name="img0" id="img0" placeholder="Primeira imagem">-->
+<!--                <input type="file" class="form-control" name="img1" id="img1" placeholder="Segunda imagem">-->
+<!--              </div>-->
+<!--              <div class="form-group mt-3">-->
+<!--                <input type="file" class="form-control" name="img2" id="img2" placeholder="Terceira imagem">-->
+<!--                <input type="file" class="form-control" name="img3" id="img3" placeholder="Quarta imagem">-->
+<!--              </div>-->
+
+<!--              <div class="my-3">-->
+<!--                <div class="loading">Loading</div>-->
+<!--                <div class="error-message"></div>-->
+<!--                <div class="sent-message">Your message has been sent. Thank you!</div>-->
+<!--              </div>-->
+
+<!--                  <div class="text-center floatleft"><button type="submit">Cadastrar</button></div>-->
+
+<!--            </form>-->
+<!--          </div>&lt;!&ndash; End Contact Form &ndash;&gt;-->
+
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </section>&lt;!&ndash; End Contact Section &ndash;&gt;-->
 
 {% else %}
 

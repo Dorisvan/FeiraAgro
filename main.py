@@ -71,6 +71,16 @@ def autorizacao():
             if app.auth[acao][estado_login]==0:
                 return redirect(url_for('painel'))
 
+@app.route('/verificar_login')
+def verificar_login():
+    try:
+        informacoes_usuario = session.get('logado')
+        estado_login = informacoes_usuario['estado_login']
+    except:
+        estado_login = "Logout"
+
+    return estado_login
+
 
 # Conexão com o banco de dados
 
@@ -95,22 +105,15 @@ def close_connection(exception):
 
 # Páginas simples
 
-
-@app.route('/verificar_login')
-def verificar_login():
-    try:
-        informacoes_usuario = session.get('logado')
-        estado_login = informacoes_usuario['estado_login']
-    except:
-        estado_login = "Logout"
-
-    return estado_login
-
-
 @app.route('/')
 def index():
     resultado_login = verificar_login()
     return render_template("index.html", estado_login = resultado_login)
+
+
+@app.route('/portfolio')
+def portfolio():
+    return render_template("#portfolio", titulo="Painel")
 
 
 @app.route('/painel')
@@ -175,6 +178,7 @@ def login():
             flash("Erro ao efetuar login! Verifique seus dados novamente.", "danger")
 
     return render_template("login.html", titulo="Login")
+
 
 # Função de login com Google
 @app.route('/login_google')
@@ -267,7 +271,7 @@ def logout():
     return redirect(url_for('index'))
 
 
-# Função de notificação
+# Função de upload arquivos
 
 @app.route('/baixar_arquivo, <codigo>, <arquivo>, <nome>, <tipo>, <classificacao>')
 def baixar_arquivo(codigo, imagem, tipo, classificacao, nome):
@@ -312,7 +316,6 @@ def baixar_arquivo(codigo, imagem, tipo, classificacao, nome):
             print("Erro ao executar função de baixar arquivos")
 
 
-
 # Funções de CREATE
 
 @app.route('/cadastrar_produto',  methods=['GET', 'POST'])
@@ -351,37 +354,17 @@ def cadastrar_produto():
     return render_template("cadastrar_produto.html", titulo="Cadastrar_Produto", estado_login=resultado_login)
 
 
-@app.route('/visualizar_produtos, <codigo_produtor>',  methods=['GET', 'POST'])
-def visualizar_produtos(codigo_produtor):
+@app.route('/cadastrar_pedido, <codigo_produto>', methods=['GET','POST'])
+def cadastrar_pedido(codigo_produto):
     resultado_login = verificar_login()
 
     informacoes_usuario = session.get('logado')
     usuario_codigo = informacoes_usuario['codigo']
 
-    dao = ProdutoDAO(get_db())
-    print(codigo_produtor)
-
-    if codigo_produtor == "None":
-        produtos = dao.Visualizar(None)
-        produtos = list(produtos)
-        produtos_db = produtos
-        tipo = "todos"
-        print(produtos_db)
-    else:
-        produtos = dao.Visualizar(codigo_produtor)
-        produtos = produtos[0]
-        produtos_db = list(produtos)
-        tipo = "individual"
-    return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo, usuario_codigo=usuario_codigo, estado_login=resultado_login)
-
-
-
-@app.route('/cadastrar_pedido, <codigo_produto>, <codigo_usuario>', methods=['GET','POST'])
-def cadastrar_pedido(codigo_produto, codigo_usuario):
-    resultado_login = verificar_login()
-
     dao1 = PedidoDAO(get_db())
     dao2 = ProdutoDAO(get_db())
+
+    produtos_db = dao2.Listar(codigo_produto, "Checagem_individual")
 
     if request.method == "POST":
         situacao = "Não entregue"
@@ -390,18 +373,40 @@ def cadastrar_pedido(codigo_produto, codigo_usuario):
         modo_entrega = request.form['modo_entrega']
         quantidade = request.form['quantidade']
 
-        pedido = Pedido(data_pedido, data_entrega, quantidade, situacao, modo_entrega, codigo_usuario, codigo_produto)
+        pedido = Pedido(data_pedido, data_entrega, quantidade, situacao, modo_entrega, usuario_codigo, codigo_produto)
         dao1.Inserir(pedido)
-    else: 
+
+        valor_atualizado = produtos_db[2] - int(quantidade)
+        dao2.Atualizar_quantidade(codigo_produto, valor_atualizado)
+        # produto = Produto(produtos_db)
+        # produto.setcodigo(codigo_produto)
+
+    else:
         pass
 
-    return render_template("cadastrar_pedido.html", estado_login=resultado_login)
+    return render_template("cadastrar_pedido.html", produto = produtos_db, estado_login=resultado_login)
 
 
+@app.route('/visualizar_produtos, <codigo_produtor>',  methods=['GET', 'POST'])
+def visualizar_produtos(codigo_produtor):
+    resultado_login = verificar_login()
 
+    informacoes_usuario = session.get('logado')
+    usuario_codigo = informacoes_usuario['codigo']
 
+    dao = ProdutoDAO(get_db())
 
-
+    if codigo_produtor == "None":
+        produtos = dao.Visualizar(None)
+        produtos = list(produtos)
+        produtos_db = produtos
+        tipo = "todos"
+    else:
+        produtos = dao.Visualizar(codigo_produtor)
+        produtos = produtos[0]
+        produtos_db = list(produtos)
+        tipo = "individual"
+    return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo, usuario_codigo=usuario_codigo, estado_login=resultado_login)
 
 
 @app.route('/area_do_usuario', methods=['GET','POST'])
@@ -456,8 +461,7 @@ def perfil_produtor():
 
     if usuario_tipo == "Produtor":
         if resultado_busca == "Criado":
-            vartitulo = "Visualizar-Perfil"
-            resultado = visualizar_perfil()
+            return redirect(url_for('visualizar_perfil'))
 
         else:
             vartitulo = "Cadastrar-Perfil"
@@ -478,7 +482,7 @@ def perfil_produtor():
     else:
         pass
 
-    return render_template("perfil_produtor.html", titulo=vartitulo, variavel_condicional=variavel_condicional, estado_login=resultado_login)
+    return render_template("perfil_produtor.html", titulo=vartitulo, variavel_condicional=variavel_condicional,estado_login=resultado_login)
 
 
 @app.route('/listar_perfis', methods=['GET','POST'])
@@ -511,392 +515,77 @@ def visualizar_perfil():
     return render_template("visualizar_perfil.html", perfil_produtor=perfil, tipo=tipo, estado_login=resultado_login)
 
 
+@app.route('/visualizar_pedido, <tipo>')
+def visualizar_pedido(tipo):
+    resultado_login = verificar_login()
 
-@app.route('/doar',  methods=['GET', 'POST'])
-def doar():
-    if request.method == 'POST':
-        data = request.form['data']
-        local_destino = request.form['local_destino']
-        usuario_codigo = request.form['usuario_codigo']
-        solicitacao_codigo = request.form['solicitacao_codigo']
+    print(tipo)
 
-        dao = DoacaoDAO(get_db())
-        dao1 = SolicitacaoDAO(get_db())
-        dao2 = UsuarioDAO(get_db())
-        dao3 = UsuarioDoencaDAO(get_db())
-
-        # Obtenção/Verificação das informações compativéis
-
-        solicitacao = dao1.Listar_Solicitacoes(solicitacao_codigo, "Verificacao")
-        solicitacao = solicitacao[0]
-        informacoes_solicitacao = list(solicitacao)
-        informacoes_solicitacao[1] = str(informacoes_solicitacao[1])
-        print(informacoes_solicitacao)
-
-        usuario_doador = dao2.Listar(usuario_codigo, "Checagem_individual")
-        informacoes_doador = list(usuario_doador)
-        informacoes_doador[3] = str(informacoes_doador[3])
-        print(informacoes_doador)
-
-        historico_situacao = dao3.Listar(usuario_codigo, "verificar")
-        print(historico_situacao)
-
-        lista_data = dao.Checar_ultimadoacao(usuario_codigo)
-        print(lista_data)
-
-        if informacoes_doador[5] == informacoes_solicitacao[4] and informacoes_solicitacao[5] == "Pendente" and informacoes_doador[4] >= 60 and historico_situacao == None and lista_data != None:
-            doacao = Doacao(data, local_destino, solicitacao_codigo, usuario_codigo)
-            codigo, email = dao.Inserir(doacao)
-
-            if codigo > 0:
-                flash("Doação cadastrada com sucesso! Código %d" % codigo, "success")
-                titulo = "Solicitação atendida."
-                informe = "Caro usuário, sua solicitação acaba de ser atendida. Consulte a agência a qual você está vinculado."
-
-                notificar(email, titulo, informe)
-            else:
-                flash("Erro ao cadastrar doação! Verifique as informações novamente.", "danger")
-        else:
-            flash("Você não cumpre com os requisitos básicos para doar.", "danger")
-
-    return render_template("doar.html", titulo="Doação")
-
-
-
-@app.route('/historico_doencas',  methods=['GET', 'POST'])
-def historico_doencas():
+    dao = PedidoDAO(get_db())
     informacoes_usuario = session.get('logado')
-    usuario_nivel = informacoes_usuario['nivel_usuario']
-    usuario_codigo = informacoes_usuario['codigo']
-
-    if usuario_nivel == 1:
-        if request.method == 'POST':
-            usuario_codigo = request.form['usuario_codigo']
-            doenca_id = request.form['doenca_id']
-
-            print(usuario_codigo)
-            print(doenca_id)
-
-            usuariodoenca = UsuarioDoenca(doenca_id, usuario_codigo)
-
-            dao = UsuarioDoencaDAO(get_db())
-            codigo = dao.Inserir(usuariodoenca)
-
-            if codigo != None:
-                flash("Estado de saúde cadastrado com sucesso!", "success")
-            else:
-                flash("Erro ao cadastrar estado de saúde!", "danger")
-
-    else:
-        if request.method == 'POST':
-            doenca_id = request.form['doenca_id']
-            usuariodoenca = UsuarioDoenca(doenca_id, usuario_codigo)
-
-            print(usuario_codigo)
-            print(doenca_id)
-
-            dao = UsuarioDoencaDAO(get_db())
-            codigo = dao.Inserir(usuariodoenca)
-
-            if codigo != None:
-                flash("Estado de saúde cadastrado com sucesso!", "success")
-            else:
-                flash("Erro ao cadastrar estado de saúde!", "danger")
-
-    return render_template("historico_doencas.html", titulo="Histórico de saúde", usuario_nivel=usuario_nivel)
-
-
-@app.route('/listar_doencas', methods=['GET',])
-def listar_doencas():
-    dao = UsuarioDoencaDAO(get_db())
-
-    informacoes_usuario = session.get('logado')
-    usuario_nivel = informacoes_usuario['nivel_usuario']
-    usuario_codigo = informacoes_usuario['codigo']
-
-    if usuario_nivel == 1:
-        historico_db = dao.Listar(None, None)
-        print(historico_db)
-        return render_template("historico_doencas.html", historico = historico_db, usuario_nivel = usuario_nivel)
-    else:
-        historico_usuario = dao.Listar(usuario_codigo, None)
-        print(historico_usuario)
-        return render_template("historico_doencas.html", historico = historico_usuario, usuario_nivel = usuario_nivel)
-
-
-# Funções de READ
-
-@app.route('/listar_usuario', methods=['GET',])
-def listar_usuario():
-    dao = UsuarioDAO(get_db())
-
-    informacoes_usuario = session.get('logado')
-    usuario_nivel = informacoes_usuario['nivel_usuario']
-    usuario_codigo = informacoes_usuario['codigo']
-
-    if usuario_nivel == 1:
-        usuarios_db = dao.Listar(None, None)
-        return render_template("listar_usuario.html", usuarios=usuarios_db, usuario_nivel = usuario_nivel)
-    else:
-        usuarios_db = dao.Listar(usuario_codigo, "Listagem_individual")
-        return render_template("listar_usuario.html", usuarios=usuarios_db, usuario_nivel = usuario_nivel)
-
-
-
-@app.route('/solicitacoes', methods=['GET',])
-def listar_solicitacoes():
-    dao = SolicitacaoDAO(get_db())
-
-    informacoes_usuario = session.get('logado')
-    usuario_codigo = informacoes_usuario['codigo']
-
-    solicitacoes_db = dao.Listar_Solicitacoes(usuario_codigo, None)
-
-    solicitacoes_usuario = dao.Listar_Solicitacoes(usuario_codigo, "Individual")
-    return render_template("solicitacoes.html", solicitacoes=solicitacoes_db, solicitacoes_usuario = solicitacoes_usuario)
-
-
-@app.route('/doacoes_busca' , methods=['GET','POST'])
-def doacoes_busca():
-    dao = DoacaoDAO(get_db())
-    if request.method == 'POST':
-        termo = request.form['termo']
-
-    informacoes_usuario = session.get('logado')
-    usuario_codigo = informacoes_usuario['codigo']
-
-    doacoes_db = dao.Busca_avancada(termo, None, None)
-    doacoes_usuario = dao.Busca_avancada(termo, usuario_codigo , 'Individual')
-    print(doacoes_db)
-    return render_template("doacoes.html", doacoes=doacoes_db, doacoes_usuario = doacoes_usuario)
-
-
-@app.route('/doacoes', methods=['GET',])
-def doacoes():
-    dao = DoacaoDAO(get_db())
-
-    informacoes_usuario = session.get('logado')
-    usuario_nivel = informacoes_usuario['nivel_usuario']
-    usuario_codigo = informacoes_usuario['codigo']
-    print(usuario_codigo)
-
-    if usuario_nivel == 1:
-        doacoes_db = dao.Listar(None)
-        return render_template("doacoes.html", doacoes=doacoes_db, usuario_nivel = usuario_nivel)
-    else:
-        doacoes_db = dao.Listar(usuario_codigo)
-        return render_template("doacoes.html", doacoes_usuario=doacoes_db, usuario_nivel=usuario_nivel)
-
-
-@app.route('/listar_doacoes_por_data', methods=['GET',])
-def listar_doacoes_por_data():
-    dao = DoacaoDAO(get_db())
-    doacoes_db = dao.Listar_por_data()
-    return render_template("doacao_por_data.html", doacao=doacoes_db)
-
-
-# Funções de UPDATE
-
-@app.route('/atualizar_usuario, <codigo>', methods=['GET', 'POST'])
-def atualizar_usuario(codigo):
+    codigo = informacoes_usuario['codigo']
     print(codigo)
-    dao = UsuarioDAO(get_db())
-
-    if request.method == "POST":
-        nome = request.form['nome']
-        email = request.form['email']
-        cpf = request.form['cpf']
-        cep = request.form['cep']
-        cidade = request.form['cidade']
-        dt_nasc = request.form['dt_nasc']
-        tipo_sanguineo = request.form['tipo_sanguineo']
-        peso = request.form['peso']
-        telefone = request.form['telefone']
-        opcao_doacao = request.form['opcao_doacao']
-        senha = request.form['senha']
-
-        usuario = Usuario(cpf, nome, dt_nasc, peso, tipo_sanguineo, cep, cidade, email, senha, telefone, opcao_doacao)
-        usuario.setCodigo(codigo)
-        ret = dao.Atualizar(usuario)
-
-        if ret > 0:
-            flash("Atualização concluída com sucesso! Código %d" % ret, "success")
-        else:
-            flash("Erro ao atualizar!", "danger")
 
 
-    usuario_db = dao.Listar(codigo, "Checagem_individual")
-    vartitulo = "Atualizar_usuario"
-    return render_template("atualizar_usuario.html", titulo=vartitulo, usuario = usuario_db)
+    if tipo == "Meus":
+        pedidos_db = dao.Visualizar_pedido(0, codigo)
 
-
-@app.route('/atualizar_solicitacao, <codigo>', methods=['GET', 'POST'])
-def atualizar_solicitacao(codigo):
-    dao = SolicitacaoDAO(get_db())
-
-    if request.method == "POST":
-        data = request.form['data']
-        urgencia = request.form['urgencia']
-        local_internacao = request.form['local_internacao']
-        usuario_codigo = request.form['usuario_codigo']
-        situacao = request.form['situacao']
-
-        solicitacao = Solicitacao(data, urgencia, local_internacao, situacao, usuario_codigo)
-        solicitacao.setId(codigo)
-
-        ret = dao.Atualizar(solicitacao)
-
-        if ret > 0:
-            flash("Atualização concluída com sucesso! Código %d" % ret, "success")
-        else:
-            flash("Erro ao atualizar!", "danger")
-
-    solicitacao_db = dao.Listar(codigo)
-    return render_template("atualizar_solicitacao.html", solicitacao=solicitacao_db)
-
-
-# Funções de DELETE
-
-@app.route('/excluir_solicitacao/<codigo>', methods=['GET',])
-def excluir_solicitacao(codigo):
-    dao = SolicitacaoDAO(get_db())
-    ret = dao.Excluir(codigo)
-    if ret == 1:
-        flash(f"Solicitação {codigo} excluída com sucesso!", "success")
     else:
-        flash(f"Erro ao excluir solicitação {codigo}.", "danger")
-    return redirect(url_for('listar_solicitacoes'))
+        pedidos_db = dao.Visualizar_pedido(1, codigo)
 
-
-@app.route('/excluir_doenca/<codigo>', methods=['GET',])
-def excluir_doenca(codigo):
-    dao = UsuarioDoencaDAO(get_db())
-    ret = dao.Excluir(codigo)
-    if ret == 1:
-        flash(f"Estado de saúde {codigo} excluído com sucesso!", "success")
-    else:
-        flash(f"Erro ao excluir estado de saúde{codigo}.", "danger")
-    return redirect(url_for('atualizar_usuario.html'))
+    return render_template('visualizar_pedido.html', tipo=tipo, pedidos = pedidos_db, estado_login=resultado_login)
 
 
 
-# Funções novas
 
 
-# Função de Doar a partir da solicitação
-@app.route('/doar_solicitacao, <int:codigo> <local_destino>', methods=['GET', 'POST'])
-def doar_solicitacao(codigo, local_destino):
-
-
-    data = date.today()
-    solicitacao_codigo = codigo
-
-    informacoes_usuario = session.get('logado')
-    usuario_codigo = informacoes_usuario['codigo']
-
-    dao = DoacaoDAO(get_db())
-    dao1 = SolicitacaoDAO(get_db())
-    dao2 = UsuarioDAO(get_db())
-    dao3 = UsuarioDoencaDAO(get_db())
-
-    # Obtenção/Verificação das informações compativéis
-
-    solicitacao = dao1.Listar_Solicitacoes(solicitacao_codigo, "Verificacao")
-    solicitacao = solicitacao[0]
-    informacoes_solicitacao = list(solicitacao)
-    informacoes_solicitacao[1] = str(informacoes_solicitacao[1])
-    print(informacoes_solicitacao)
-
-    usuario_doador = dao2.Listar(usuario_codigo, "Checagem_individual")
-    informacoes_doador = list(usuario_doador)
-    informacoes_doador[3] = str(informacoes_doador[3])
-    print(informacoes_doador)
-
-    historico_situacao = dao3.Listar(usuario_codigo, "verificar")
-    print(historico_situacao)
-
-    lista_data = dao.Checar_ultimadoacao(usuario_codigo)
-    print(lista_data)
-
-    if informacoes_doador[5] == informacoes_solicitacao[4] and informacoes_solicitacao[5] == "Pendente" and \
-            informacoes_doador[4] >= 60 and historico_situacao == None and lista_data != None:
-        doacao = Doacao(data, local_destino, solicitacao_codigo, usuario_codigo)
-        codigo, email = dao.Inserir(doacao)
-
-        if codigo > 0:
-            flash("Doação cadastrada com sucesso! Código %d" % codigo, "success")
-            titulo = "Solicitação atendida."
-            informe = "Caro usuário, sua solicitação acaba de ser atendida. Consulte a agência a qual você está vinculado."
-
-            notificar(email, titulo, informe)
-        else:
-            flash("Erro ao cadastrar doação! Verifique as informações novamente. Provavelmente você não cumpre os requisitos para satisfazer a doação.", "danger")
-    else:
-        flash("Você não cumpre com os requisitos básicos para doar.", "danger")
-
-    return redirect(url_for("doar"))
 
 
 # Função de Notificação
 
-@app.route('/notificar',  methods=['GET', 'POST'])
-def notificar(usuario_email, titulo, mensagem):
-    email_inicial = 'maissanguetestes@gmail.com'
-    senha_email = 'xmfxugkbdnekwxkq'
-    email_destinatario = usuario_email
-
-    titulo = titulo
-    mensagem = mensagem
-
-    em = EmailMessage()
-    em['From'] = email_inicial
-    em['To'] = email_destinatario
-    em['Subject'] = titulo
-    em.set_content(mensagem)
-
-    context = ssl.create_default_context()
-
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
-        smtp.login(email_inicial, senha_email)
-        smtp.sendmail(email_inicial, email_destinatario, em.as_string())
+# @app.route('/notificar',  methods=['GET', 'POST'])
+# def notificar(usuario_email, titulo, mensagem):
+#     email_inicial = 'maissanguetestes@gmail.com'
+#     senha_email = 'xmfxugkbdnekwxkq'
+#     email_destinatario = usuario_email
+#
+#     titulo = titulo
+#     mensagem = mensagem
+#
+#     em = EmailMessage()
+#     em['From'] = email_inicial
+#     em['To'] = email_destinatario
+#     em['Subject'] = titulo
+#     em.set_content(mensagem)
+#
+#     context = ssl.create_default_context()
+#
+#     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+#         smtp.login(email_inicial, senha_email)
+#         smtp.sendmail(email_inicial, email_destinatario, em.as_string())
 
 
 # Função de busca avançada por usuários
 
-@app.route('/usuarios_busca' , methods=['GET','POST'])
-def usuarios_busca():
-    dao = UsuarioDAO(get_db())
-    if request.method == 'POST':
-        termo = request.form['termo']
-
-    usuarios_db = dao.Busca_avancada(termo)
-    return render_template("listar_usuario.html", usuarios=usuarios_db)
-
-
-# Corrigir bug relacionado ao tipo_sanguineo
-@app.route('/solicitacoes_busca' , methods=['GET','POST'])
-def solicitacoes_busca():
-    dao = SolicitacaoDAO(get_db())
-    if request.method == 'POST':
-        termo = request.form['termo']
-
-    informacoes_usuario = session.get('logado')
-    usuario_codigo = informacoes_usuario['codigo']
-
-    solicitacoes_db = dao.Busca_avancada(termo, usuario_codigo, None)
-    # solicitacoes_usuario = dao.Busca_avancada(termo, usuario_codigo, 'Individual')
-    solicitacoes_usuario = dao.Listar_Solicitacoes(usuario_codigo, "Individual")
-    return render_template("solicitacoes.html", solicitacoes=solicitacoes_db, solicitacoes_usuario = solicitacoes_usuario)
-
-@app.route('/excluir_usuario/<codigo>', methods=['GET',])
-def excluir_usuario(codigo):
-    dao = UsuarioDAO(get_db())
-    ret = dao.Excluir(codigo)
-    if ret == 1:
-        flash(f"Conta excluída com sucesso!", "success")
-    else:
-        flash(f"Erro ao excluir Conta.", "danger")
-    return redirect(url_for('logout'))
+# @app.route('/usuarios_busca' , methods=['GET','POST'])
+# def usuarios_busca():
+#     dao = UsuarioDAO(get_db())
+#     if request.method == 'POST':
+#         termo = request.form['termo']
+#
+#     usuarios_db = dao.Busca_avancada(termo)
+#     return render_template("listar_usuario.html", usuarios=usuarios_db)
+#
+#
+# @app.route('/excluir_usuario/<codigo>', methods=['GET',])
+# def excluir_usuario(codigo):
+#     dao = UsuarioDAO(get_db())
+#     ret = dao.Excluir(codigo)
+#     if ret == 1:
+#         flash(f"Conta excluída com sucesso!", "success")
+#     else:
+#         flash(f"Erro ao excluir Conta.", "danger")
+#     return redirect(url_for('logout'))
 
 
 # HOST

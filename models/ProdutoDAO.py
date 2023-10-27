@@ -44,6 +44,44 @@ class ProdutoDAO():
         except:
             return 0
 
+    def Listar(self, codigo, tipo):
+        try:
+            cursor = self.con.cursor()
+            if tipo == "Checagem_individual":
+                # pegar somente uma planta
+                sql = "SELECT * FROM Produto WHERE codigo=%s"
+                cursor.execute(sql, (codigo,))
+                produto = cursor.fetchone()
+                return produto
+
+            elif tipo == "Listagem_individual":
+                sql = "SELECT * FROM Produto WHERE codigo=%s"
+                cursor.execute(sql, (codigo,))
+                produto = cursor.fetchall()
+                return produto
+
+            else:
+                # pegar todas as plantas
+                sql = "SELECT * FROM Produto"
+                cursor.execute(sql)
+                produtos = cursor.fetchall()
+                return produtos
+        except:
+            return None
+
+
+    def Atualizar_quantidade(self, codigo, valor_atualizado):
+        try:
+            sql = "UPDATE Produto " \
+                  "SET quantidade=%s WHERE codigo=%s"
+
+            cursor = self.con.cursor()
+            cursor.execute(sql, (valor_atualizado, codigo))
+            self.con.commit()
+            return cursor.rowcount
+        except:
+            return 0
+
 
 
 
