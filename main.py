@@ -25,6 +25,8 @@ from models.Perfil_Produtor import Perfil_Produtor
 from models.Perfil_ProdutorDAO import Perfil_ProdutorDAO
 from models.Pedido import Pedido
 from models.PedidoDAO import PedidoDAO
+from models.Mensagem import Mensagem
+from models.MensagemDAO import MensagemDAO
 
 
 # Variáveis gerais
@@ -108,7 +110,7 @@ def close_connection(exception):
 @app.route('/')
 def index():
     resultado_login = verificar_login()
-    return render_template("index.html", estado_login = resultado_login)
+    return render_template("index.html", estado_login = resultado_login,)
 
 
 @app.route('/portfolio')
@@ -409,6 +411,25 @@ def visualizar_produtos(codigo_produtor):
         produtos_db = list(produtos)
         tipo = "individual"
     return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo, usuario_codigo=usuario_codigo, estado_login=resultado_login)
+
+
+@app.route('/visualizar_mensagens, <tipo>',  methods=['GET', 'POST'])
+def visualizar_mensagens(tipo):
+    resultado_login = verificar_login()
+    dao = MensagemDAO(get_db())
+
+    informacoes_usuario = session.get('logado')
+    usuario_codigo = informacoes_usuario['codigo']
+
+    mensagens = dao.Listar(usuario_codigo, tipo)
+    mensagens = list(mensagens)
+
+    return render_template("visualizar_mensagens.html", mensagens=mensagens, estado_login=resultado_login)
+
+
+
+
+
 
 
 @app.route('/area_do_usuario', methods=['GET','POST'])

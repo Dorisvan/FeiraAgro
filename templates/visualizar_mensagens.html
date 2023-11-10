@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+{% block tudo %}
+
+
+<section id="appointment" class="appointment section-bg" style="position: relative;">
+      <div class="container" style="height: 50vh;">
+        <div class="div_externa_form_visualizar_produto">
+
+            <table class="table">
+
+                  <div class="col-lg-64">
+
+                        <div class="reply-form">
+
+                        <table class="table">
+
+                            <thead>
+                                <th>Código</th>
+                                <th>Conteúdo</th>
+                                <th>Situação</th>
+                            </thead>
+                            <tbody>
+                            {% if mensagens %}
+                                {% for item in mensagens %}
+
+                                  <tr>
+                                      <td>{{ item[0] }}</td>
+                                    <td>{{ item[1] }}</td>
+                                    <td>{{ item[3] }}</td>
+                                  </tr>
+                              {% endfor %}
+                            {% else %}
+                             <p>Nenhum item foi encontrado</p>
+                            {% endif %}
+                        </tbody>
+            </table>
+          </div>
+        </section>
+
+
+          <div class="section-title"></div>
+
+</section>
+
+
+{% endblock %}

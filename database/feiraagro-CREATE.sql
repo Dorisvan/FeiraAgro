@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `feiraagro`.`Usuario` (
   `nivel` INT NOT NULL,
   `contato` VARCHAR(50) NULL,
   `estado_login` INT NULL,
+  `imagem_perfil` VARCHAR(100) NULL,
   PRIMARY KEY (`codigo`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
@@ -98,6 +99,25 @@ CREATE TABLE IF NOT EXISTS `feiraagro`.`Perfil_Produtor` (
   PRIMARY KEY (`codigo`),
   INDEX `fk_Perfil_Produtor_Usuario1_idx` (`Usuario_codigo` ASC),
   CONSTRAINT `fk_Perfil_Produtor_Usuario1`
+    FOREIGN KEY (`Usuario_codigo`)
+    REFERENCES `feiraagro`.`Usuario` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `feiraagro`.`Mensagem`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `feiraagro`.`Mensagem` (
+  `codigo` BIGINT NOT NULL AUTO_INCREMENT,
+  `conteudo` VARCHAR(500) NOT NULL,
+  `tipo` VARCHAR(30) NULL,
+  `situacao` VARCHAR(45) NULL,
+  `Usuario_codigo` BIGINT NOT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `fk_Mensagem_Usuario1_idx` (`Usuario_codigo` ASC),
+  CONSTRAINT `fk_Mensagem_Usuario1`
     FOREIGN KEY (`Usuario_codigo`)
     REFERENCES `feiraagro`.`Usuario` (`codigo`)
     ON DELETE NO ACTION
