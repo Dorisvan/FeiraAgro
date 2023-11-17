@@ -38,4 +38,13 @@ class PedidoDAO():
         except:
             pass
 
+    def excluir(self, codigo):
+        try:
+            sql = "DELETE FROM Pedido WHERE codigo = %s"
+            cursor = self.con.cursor()
+            cursor.execute(sql, (codigo,))
+            self.con.commit()
+            return cursor.rowcount
+        except:
+            return 0
 

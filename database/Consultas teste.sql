@@ -59,3 +59,10 @@ FROM Pedido as pe, Produto as pr, Usuario as u
 WHERE pr.Usuario_codigo = 2 AND pr.codigo = pe.Produto_codigo;
 
 SELECT * FROM Pedido WHERE Pedido.Usuario_codigo = 2;
+
+SELECT DISTINCT p.codigo, p.nome, p.quantidade, p.valor, p.classificacao, p.procedencia, p.img_produto, p.descricao, p.Usuario_codigo as codigo_dono, u.nome as nome_do_produtor, u.contato, u.endereco, pf.local_venda 
+FROM Produto as p, Perfil_produtor as pf , Usuario as u
+WHERE u.codigo = p.Usuario_codigo AND u.codigo = pf.Usuario_codigo AND (p.codigo LIKE 1 OR p.nome LIKE 1 OR p.quantidade LIKE 1 OR p.valor LIKE 1 OR p.classificacao LIKE 1 OR p.img_produto LIKE 1 OR p.descricao LIKE 1 OR p.Usuario_codigo LIKE 1 OR u.nome LIKE 1 OR u.contato LIKE 1 OR u.endereco LIKE 1 OR pf.local_venda LIKE 1); 
+
+
+SELECT * FROM Usuario;

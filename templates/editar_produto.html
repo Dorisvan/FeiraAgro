@@ -1,0 +1,97 @@
+{% extends "index.html" %}
+{% block tudo %}
+
+
+<br>
+<br>
+
+<br>
+<br>
+
+<section id="appointment" class="appointment section-bg" style="position: relative;">
+      <div class="container" style="height: 80vh;">
+        <div class="div_externa_form_cadastro container">
+
+          <div class="section-title container">
+            <br>
+            <div class="section-header">
+              <h2>Editar Produto</h2>
+            </div>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <ul id="messages" class="list-unstyled">
+                {% for category, message in messages %}
+                  <li class="alert alert-{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+          </div>
+
+          <form action="{{ url_for('editar_produto', codigo_produto=codigo_produto) }}" method="POST", enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-4 form-group container">
+                  <input type="text" name="nome" class="form-control" value="{{ produto[1] }}" id="nome" placeholder="Nome do Produto" required>
+                </div>
+
+                <div class="col-md-4 form-group container">
+                  <select id="classificacao" name="classificacao" required class="form-control">
+                    <option value="Não sei" {% if produto[4] == "Não sei" %}{{ "selected" }}{% endif %}>Classificação</option>
+                    <option value="Hortaliças e Verduras" {% if produto[4] == "Hortaliças e Verduras" %}{{ "selected" }}{% endif %}>Hortaliças e Verduras</option>
+                    <option value="Grão e Cereais" {% if produto[4] == "Grão e Cereais" %}{{ "selected" }}{% endif %}>Grão e Cereais</option>
+                    <option value="Frutas" {% if produto[4] == "Frutas" %}{{ "selected" }}{% endif %}>Frutas</option>
+                    <option value="Derivados do leite" {% if produto[4] == "Derivados de leite" %}{{ "selected" }}{% endif %}>Derivados de leite</option>
+                    <option value="Molhos e Condimentos" {% if produto[4] == "Molhos e Condimentos" %}{{ "selected" }}{% endif %}>Molhos e Condimentos</option>
+                    <option value="Sucos e Polpas" {% if produto[4] == "Sucos e Polpas" %}{{ "selected" }}{% endif %}>Sucos e Polpas</option>
+                  </select>
+              </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col-md-4 form-group container">
+                <input type="number" class="form-control" name="valor" value="{{ produto[3] }}" id="valor"  placeholder="Valor" required>
+              </div>
+              <div class="col-md-4 form-group container">
+                <input type="number" class="form-control" name="quantidade" value="{{ produto[2] }}" id="quantidade" placeholder="Quantidade" required>
+              </div>
+            </div>
+
+            <br>
+
+              <div class="col-md-4 form-group container">
+                <select name="procedencia" required class="form-control">
+                  <option value="Não sei" {% if produto[5] == "Procedência" %}{{ "selected" }}{% endif %}>Procedência</option>
+                  <option value="Orgânico" {% if produto[5] == "Orgânico" %}{{ "selected" }}{% endif %}>Orgânico</option>
+                  <option value="Não-orgânico" {% if produto[5] == "Não orgânico" %}{{ "selected" }}{% endif %}>Não orgânico</option>
+                </select>
+              </div>
+
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="descricao" rows="7" value="{{ produto[7] }}" placeholder="Descrição" ></textarea>
+              </div>
+
+              <div class="form-group mt-3">
+                <strong>Escolha uma imagem de sua preferência que represente seu produto.</strong>
+                <input type="file" class="form-control" name="img_produto" id="img_produto" value="{{ produto[6] }}" placeholder="Acrescente uma imagem do seu produto">
+              </div>
+
+
+            <div class="row">
+
+            </div>
+
+            <br>
+
+            <div class="text-center">
+              <button class="botao-cadastro " type="submit">Concluir</button>
+            <br>
+          </form>
+
+        </div>
+
+      <div class="section-title"></div>
+</section><!-- End Appointment Section -->
+
+{% endblock tudo %}

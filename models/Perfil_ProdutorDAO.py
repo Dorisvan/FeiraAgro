@@ -65,6 +65,28 @@ class Perfil_ProdutorDAO():
         except:
             print("gg")
 
+
+    def Verificacao_perfil(self, codigo):
+        cursor = self.con.cursor()
+
+        try:
+            sql = "SELECT * FROM Perfil_produtor WHERE codigo = %s"
+
+            cursor.execute(sql)
+            resultado = cursor.fetchone()
+
+            if resultado != None:
+                Situacao = "OK"
+            else:
+                Situacao = "Pendente"
+
+            return Situacao
+
+        except:
+            Situacao
+            pass
+
+
     def listar(self, codigo=None):
         try:
             sql = "SELECT * FROM Perfil_Produtor"

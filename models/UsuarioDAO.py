@@ -106,3 +106,24 @@ class UsuarioDAO():
 
         except:
             return None
+
+
+    def Verificacao_perfil(self, codigo):
+        cursor = self.con.cursor()
+
+        try:
+            sql = "SELECT * FROM Usuario WHERE codigo = %s"
+
+            cursor.execute(sql)
+            resultado = cursor.fetchone()
+            print(resultado)
+
+            if resultado:
+                Situacao = "OK"
+            else:
+                Situacao = "Pendente"
+
+            return Situacao
+
+        except:
+            pass

@@ -3,6 +3,22 @@
 
 {% if tipo == "todos" %}
 
+
+<div class="reply-form" style="text-align: center">
+
+    <form action="{{ url_for('busca_avancada', categoria="produtos") }}" method="POST" >
+          <div class="row">
+            <div class="col-md-4 form-group container">
+              <label for="termo"></label>
+              <input type="text" name="termo" class="form-control" id="termo" placeholder="Pesquisa" required>
+              <div class="validate"></div>
+            </div>
+          </div>
+          <br>
+          <div class="text-center"><button class="botao-cadastro" type="submit">Buscar</button></div>
+          <br>
+    </form>
+</div>
        <!-- ======= Projet Details Section ======= -->
 <!--        <section id="project-details" class="project-details">-->
 <!--          <div class="container" data-aos="fade-up" data-aos-delay="100">-->
@@ -50,6 +66,8 @@
                                     <td>{{ item[11] }}</td>
                                     <td>{{ item[12] }}</td>
                                       <td><a href="{{ url_for('cadastrar_pedido', codigo_produto=item[0], codigo_usuario=usuario_codigo) }}">Adquirir produto</a></td>
+                                      <td><a href="{{ url_for('editar_produto', codigo_produto=item[0]) }}">Editar produto</a></td>
+
                                   </tr>
                               {% endfor %}
                         {% else %}
@@ -65,7 +83,24 @@
 
     </section>
 
+
 {% else %}
+
+<div class="reply-form" style="text-align: center">
+
+    <form action="{{ url_for('busca_avancada', categoria="produtos") }}" method="POST" >
+          <div class="row">
+            <div class="col-md-4 form-group container">
+              <label for="termo"></label>
+              <input type="text" name="termo" class="form-control" id="termo" placeholder="Pesquisa" required>
+              <div class="validate"></div>
+            </div>
+          </div>
+          <br>
+          <div class="text-center"><button class="botao-cadastro" type="submit">Buscar</button></div>
+          <br>
+    </form>
+</div>
 
        <!-- ======= Projet Details Section ======= -->
         <section id="project-details" class="project-details">
@@ -147,6 +182,8 @@
           <div class="section-title"></div>
 
     </section>
+
+
 
 <!--<br>-->
 <!--<br>-->

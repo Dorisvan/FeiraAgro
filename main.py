@@ -110,6 +110,8 @@ def close_connection(exception):
 @app.route('/')
 def index():
     resultado_login = verificar_login()
+    if resultado_login:
+        verificar_perfil()
     return render_template("index.html", estado_login = resultado_login,)
 
 
@@ -273,6 +275,22 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route('/verificar_perfil')
+def verificar_perfil():
+    resultado_login = verificar_login()
+
+    informacoes_usuario = session.get('logado')
+    usuario_codigo = informacoes_usuario['codigo']
+
+    dao_pf = Perfil_ProdutorDAO(get_db())
+    dao_p = UsuarioDAO(get_db())
+
+    resultado1 = dao_p.Verificacao_perfil(usuario_codigo)
+    resultado2 = dao_pf.Verificacao_perfil(usuario_codigo)
+
+    return resultado2
+
+
 # Função de upload arquivos
 
 @app.route('/baixar_arquivo, <codigo>, <arquivo>, <nome>, <tipo>, <classificacao>')
@@ -356,7 +374,8 @@ def cadastrar_produto():
     return render_template("cadastrar_produto.html", titulo="Cadastrar_Produto", estado_login=resultado_login)
 
 
-@app.route('/cadastrar_pedido, <codigo_produto>', methods=['GET','POST'])
+@app.route('/cadastrar_pedido'
+           ', <codigo_produto>', methods=['GET','POST'])
 def cadastrar_pedido(codigo_produto):
     resultado_login = verificar_login()
 
@@ -400,17 +419,47 @@ def visualizar_produtos(codigo_produtor):
 
     if codigo_produtor == "None":
         produtos = dao.Visualizar(None)
+        print('a')
         produtos = list(produtos)
         produtos_db = produtos
         tipo = "todos"
     else:
         produtos = dao.Visualizar(codigo_produtor)
         print(produtos)
-        produtos  = list(produtos)
+        produtos = list(produtos)
         print(produtos)
         produtos_db = list(produtos)
         tipo = "individual"
     return render_template("visualizar_produtos.html", produtos=produtos_db, tipo=tipo, usuario_codigo=usuario_codigo, estado_login=resultado_login)
+
+
+@app.route('/editar_produto, <codigo_produto>', methods=['GET', 'POST'])
+def editar_produto(codigo_produto):
+    dao = ProdutoDAO(get_db())
+    print(codigo_produto)
+
+    if request.method == "POST":
+        nome = request.form['nome']
+        classificacao = request.form['tipo']
+        valor= request.form['tipo']
+        quantidade = request.form['tipo']
+        procedencia = request.form['tipo']
+        descricao = request.form['tipo']
+        img_produto = request.form['tipo']
+
+
+        produto = Produto(nome, classificacao, valor, quantidade, procedencia, descricao, img_produto,)
+        produto.setCodigo(codigo_produto)
+        ret = dao.editar(produto)
+
+        if ret > 0:
+            flash("Atualizado com sucesso! Código %d" % codigo_produto, "success")
+        else:
+            flash("Erro ao atualizar!", "danger")
+
+    produto_db = dao.Visualizar(codigo_produto)
+    print(produto_db)
+    return render_template("editar_produto.html", produto=produto_db)
 
 
 @app.route('/visualizar_mensagens, <tipo>',  methods=['GET', 'POST'])
@@ -559,10 +608,41 @@ def visualizar_pedido(tipo):
     return render_template('visualizar_pedido.html', tipo=tipo, pedidos = pedidos_db, estado_login=resultado_login)
 
 
+@app.route('/deletar_pedido/ <codigo>', methods=['GET', ])
+def deletar_pedido(codigo):
+    resultado_login = verificar_login()
+
+    print(tipo)
+
+    dao = PedidoDAO(get_db())
+    dao.excluir(item, codigo)
+    ret = dao.excluir(codigo)
+    if ret == 1:
+        flash(f"Pedido {codigo} excluído com sucesso!", "success")
+    else:
+        flash(f"Erro ao excluir pedido {codigo}", "danger")
+    return redirect(url_for('listar_pedido'))
 
 
 
+# Buscas avançadas
 
+@app.route('/busca_avancada, <categoria>' , methods=['GET','POST'])
+def busca_avancada(categoria):
+    resultado_login = verificar_login()
+
+    informacoes_usuario = session.get('logado')
+    usuario_codigo = informacoes_usuario['codigo']
+
+    dao_produto = ProdutoDAO(get_db())
+
+    if request.method == 'POST':
+        termo = request.form['termo']
+        if categoria == "produtos":
+            produtos = dao_produto.Busca_avancada(termo)
+            tipo = "todos"
+
+    return render_template("visualizar_produtos.html", produtos = produtos, tipo=tipo, usuario_codigo=usuario_codigo, estado_login=resultado_login)
 
 # Função de Notificação
 
