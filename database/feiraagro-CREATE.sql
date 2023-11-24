@@ -113,6 +113,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `feiraagro`.`Mensagem` (
   `codigo` BIGINT NOT NULL AUTO_INCREMENT,
+  `titulo` VARCHAR(100) NOT NULL,
   `conteudo` VARCHAR(500) NOT NULL,
   `tipo` VARCHAR(30) NULL,
   `situacao` VARCHAR(45) NULL,

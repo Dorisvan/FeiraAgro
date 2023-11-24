@@ -6,6 +6,8 @@ SELECT * FROM Produto;
 
 SELECT * FROM Pedido;
 
+SELECT * FROM Mensagem;
+
 SELECT p.codigo, p.descricao_producao, p.local_venda, p.img0, p.img1, p.img2, p.img3, p.Usuario_codigo, u.nome, u.email, u.endereco, u.contato
 FROM Perfil_Produtor as p, Usuario as u
 WHERE p.Usuario_codigo = u.codigo AND u.codigo = 1;
@@ -32,6 +34,9 @@ VALUES ("Emilly", "Emi@gmail.com", 123, "Bacurau", "Produtor", 1 , "9999999");
 
 INSERT INTO Pedido(data_pedido, data_entrega, quantidade, situacao, modo_entrega, status_compra, Usuario_codigo, Produto_codigo)
 VALUES ("2023-11-23", "2023-10-21", 1, "Entregue", "Delivery", "Finalizada" , 1, 2);
+
+INSERT INTO Mensagem(titulo, conteudo, tipo, situacao, Usuario_codigo)
+VALUES("Aviso", "123", "Urgente", "Não_lida", 1);
 
 
 SELECT DISTINCT p.codigo, p.nome, p.quantidade, p.valor, p.classificacao, p.procedencia, p.img_produto, p.descricao, p.Usuario_codigo as codigo_dono, u.nome as nome_do_produtor, u.contato, u.endereco, pf.local_venda

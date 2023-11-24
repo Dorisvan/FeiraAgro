@@ -792,6 +792,23 @@ def excluir_pedido(codigo):
     return redirect(url_for('visualizar_pedido', tipo="Meus"))
 
 
+@app.route('/atualizar_lida, <codigo_mensagem>' , methods=['GET','POST'])
+def atualizar_lida(codigo_mensagem):
+    resultado_login = verificar_login()
+    tipo_usuario = verificar_tipo_usuario()
+
+    dao = MensagemDAO(get_db())
+
+    ret = dao.Atualizar(codigo_mensagem)
+
+    if ret == 1:
+        flash(f"A mensagem em questão foi marcada como lida!", "success")
+    else:
+        flash(f"Aparentemente a mensagem não pode ser marcada como lida", "danger")
+
+    return redirect(url_for('visualizar_mensagens', tipo="Listagem_individual"))
+
+
 
 # Buscas avançadas
 

@@ -44,3 +44,19 @@ class MensagemDAO():
         except:
             return None
 
+
+    def Atualizar(self, codigo):
+        try:
+            sql = "UPDATE Mensagem " \
+                  "SET situacao=%s" \
+                  "WHERE codigo=%s"
+
+            cursor = self.con.cursor()
+            cursor.execute(sql, ("Lida", codigo,))
+            self.con.commit()
+            return cursor.rowcount
+
+        except:
+            return 0
+
+
