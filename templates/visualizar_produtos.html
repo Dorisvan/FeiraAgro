@@ -47,6 +47,7 @@
                                 <th>Contato</th>
                                 <th>Endereço</th>
                                 <th>Local de Venda</th>
+                                <th>Opções</th>
 
                             </thead>
                             <tbody>
@@ -65,9 +66,7 @@
                                     <td>{{ item[10] }}</td>
                                     <td>{{ item[11] }}</td>
                                     <td>{{ item[12] }}</td>
-                                      <td><a href="{{ url_for('cadastrar_pedido', codigo_produto=item[0], codigo_usuario=usuario_codigo) }}">Adquirir produto</a></td>
-                                      <td><a href="{{ url_for('editar_produto', codigo_produto=item[0]) }}">Editar produto</a></td>
-
+                                      <td><a href="{{ url_for('cadastrar_pedido', codigo_produto=item[0], codigo_usuario=usuario_codigo) }}">Adquirir produto</a>|<a href="{{ url_for('editar_produto', codigo_produto=item[0]) }}">Editar produto</a></td>
                                   </tr>
                               {% endfor %}
                         {% else %}
@@ -102,78 +101,47 @@
     </form>
 </div>
 
-       <!-- ======= Projet Details Section ======= -->
-        <section id="project-details" class="project-details">
-          <div class="container" data-aos="fade-up" data-aos-delay="100">
-
+<section id="appointment" class="appointment section-bg" style="position: relative;">
+      <div class="container" style="height: 50vh;">
+        <div class="div_externa_form_visualizar_produto">
 
             <table class="table">
 
-                  <div class="col-lg-8">
-
-                    {% if produtos %}
-                      {% for item in produtos %}
+                  <div class="col-lg-64">
 
                         <div class="reply-form">
 
                         <table class="table">
-                          <tbody>
-                              <h2>Código do Produto: {{ item[0] }}</h2>
-                              <tr>
-                                <td>Nome</td>
-                                <td>{{ item[1] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Quantidade</td>
-                                <td>{{ item[2] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Valor</td>
-                                <td>{{ item[3] }}</td>
-                              </tr>
-                               <tr>
-                                <td>Classificação</td>
-                                <td>{{ item[4] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Procedência</td>
-                                <td>{{ item[5] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Imagem</td>
-                                <td>{{ item[6] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Descrição</td>
-                                <td>{{ item[7] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Código do produtor</td>
-                                <td>{{ item[8] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Nome do produtor</td>
-                                <td>{{ item[9] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Contato</td>
-                                <td>{{ item[10] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Endereço</td>
-                                <td>{{ item[11] }}</td>
-                              </tr>
-                              <tr>
-                                <td>Local de venda</td>
-                                <td>{{ item[12] }}</td>
-                              </tr>
-                              <a></a>
-                              <br>
-                      {% endfor %}
-                    {% else %}
-                         <p>Nenhum item foi encontrado</p>
-                    {% endif %}
-              </tbody>
+
+                            <thead>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Quantidade</th>
+                                <th>Valor</th>
+                                <th>Classificação</th>
+                                <th>Procedência</th>
+                                <th>Descrição</th>
+                                <th>Opções</th>
+                            </thead>
+                            <tbody>
+                            {% if produtos %}
+                                {% for item in produtos %}
+
+                                  <tr>
+                                      <td>{{ item[6] }}</td>
+                                    <td>{{ item[1] }}</td>
+                                    <td>{{ item[2] }}</td>
+                                    <td>{{ item[3] }}</td>
+                                    <td>{{ item[4] }}</td>
+                                    <td>{{ item[5] }}</td>
+                                    <td>{{ item[7] }}</td>
+                                      <td><a href="{{ url_for('cadastrar_pedido', codigo_produto=item[0], codigo_usuario=usuario_codigo) }}">Adquirir produto</a>|<a href="{{ url_for('editar_produto', codigo_produto=item[0]) }}">Editar produto</a></td>
+                                  </tr>
+                              {% endfor %}
+                        {% else %}
+                             <p>Nenhum item foi encontrado</p>
+                        {% endif %}
+                        </tbody>
             </table>
           </div>
         </section>
@@ -182,6 +150,11 @@
           <div class="section-title"></div>
 
     </section>
+
+</body>
+</html>
+
+
 
 
 

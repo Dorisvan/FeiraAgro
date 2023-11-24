@@ -13,6 +13,13 @@
               <h2>Cadastro de Produtor</h2>
             </div>
           </div>
+          {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <ul id="messages" class="list-unstyled">
+                    <li class="alert alert-{{ messages[-1][0] }}">{{ messages[-1][1] }}</li>
+                </ul>
+              {% endif %}
+          {% endwith %}
 
 
           <form action="{{ url_for('perfil_produtor') }}" method="POST",>

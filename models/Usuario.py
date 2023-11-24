@@ -1,5 +1,5 @@
 class Usuario():
-    def __init__(self, nome, email, senha, endereco, tipo, nivel, contato, estado_login="", perfil_produtor_codigo='', imagem_perfil=''):
+    def __init__(self, nome, email, senha, endereco, tipo, nivel, contato, estado_login="", imagem_perfil=''):
         self.codigo = 0
         self.nome = nome
         self.email = email
@@ -10,7 +10,6 @@ class Usuario():
         self.contato = contato
         self.estado_login = estado_login
         self.imagem_perfil = imagem_perfil
-        self.perfil_produtor_codigo = perfil_produtor_codigo
 
 
 

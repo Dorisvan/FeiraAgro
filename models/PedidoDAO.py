@@ -4,10 +4,10 @@ class PedidoDAO():
 
     def Inserir(self, pedido):
         try:
-            sql = "INSERT INTO Pedido(data_pedido, data_entrega, quantidade, situacao, modo_entrega, Usuario_codigo, Produto_codigo) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO Pedido(data_pedido, data_entrega, quantidade, situacao, modo_entrega, status_compra, Usuario_codigo, Produto_codigo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
 
             cursor = self.con.cursor()
-            cursor.execute(sql, (pedido.data_pedido, pedido.data_entrega, pedido.quantidade, pedido.situacao, pedido.modo_entrega, pedido.usuario_codigo, pedido.produto_codigo))
+            cursor.execute(sql, (pedido.data_pedido, pedido.data_entrega, pedido.quantidade, pedido.situacao, pedido.modo_entrega, pedido.status_compra, pedido.usuario_codigo, pedido.produto_codigo))
 
             self.con.commit()
 
@@ -25,7 +25,6 @@ class PedidoDAO():
                 cursor = self.con.cursor()
                 cursor.execute(sql, (codigo,))
                 pedidos = cursor.fetchall()
-                print(pedidos)
                 return pedidos
             else:
                 sql = "SELECT DISTINCT pe.codigo,  pe.data_pedido, pe.data_entrega, pe.quantidade, pe.situacao, pe.modo_entrega, pe.Usuario_codigo, pe.Produto_codigo" \
@@ -38,12 +37,53 @@ class PedidoDAO():
         except:
             pass
 
-    def excluir(self, codigo):
+
+    def Listar(self, codigo, tipo):
+        try:
+            cursor = self.con.cursor()
+            if tipo == "Checagem_individual":
+                sql = "SELECT * FROM Pedido WHERE codigo=%s"
+                cursor.execute(sql, (codigo,))
+                usuario = cursor.fetchone()
+                return usuario
+
+            elif tipo == "Listagem_individual":
+                sql = "SELECT * FROM Pedido WHERE codigo=%s"
+                cursor.execute(sql, (codigo,))
+                usuario = cursor.fetchall()
+                return usuario
+
+            else:
+                sql = "SELECT * FROM Pedido"
+                cursor.execute(sql)
+                usuarios = cursor.fetchall()
+                return usuarios
+        except:
+            return None
+
+    def Atualizar(self, pedido):
+        try:
+            sql = "UPDATE Pedido " \
+                  "SET data_entrega=%s, modo_entrega=%s, " \
+                  "quantidade=%s" \
+                  "WHERE codigo=%s"
+
+            cursor = self.con.cursor()
+            cursor.execute(sql, (pedido.data_entrega, pedido.modo_entrega, pedido.quantidade, pedido.codigo))
+            self.con.commit()
+            return cursor.rowcount
+
+        except:
+            return 0
+
+
+    def Excluir(self, codigo):
         try:
             sql = "DELETE FROM Pedido WHERE codigo = %s"
             cursor = self.con.cursor()
             cursor.execute(sql, (codigo,))
             self.con.commit()
+            print(cursor.rowcount)
             return cursor.rowcount
         except:
             return 0

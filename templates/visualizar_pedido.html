@@ -12,6 +12,13 @@
                   <div class="col-lg-64">
 
                         <div class="reply-form">
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    <ul id="messages" class="list-unstyled">
+                                        <li class="alert alert-{{ messages[-1][0] }}">{{ messages[-1][1] }}</li>
+                                    </ul>
+                                {% endif %}
+                            {% endwith %}
 
                         <table class="table">
 
@@ -22,8 +29,10 @@
                                 <th>Quantidade</th>
                                 <th>Situação</th>
                                 <th>Modo de Entrega</th>
+                                <th>Status da Compra</th>
                                 <th>Código do Usuário</th>
                                 <th>Código do Produto</th>
+                                <th>Opções</th>
 
                             </thead>
                             <tbody>
@@ -39,6 +48,8 @@
                                     <td>{{ item[5] }}</td>
                                     <td>{{ item[6] }}</td>
                                     <td>{{ item[7] }}</td>
+                                    <td>{{ item[8] }}</td>
+                                      <td> <a href="{{ url_for('excluir_pedido', codigo=item[0]) }}">Excluir</a>|<a href="{{ url_for('editar_pedido', codigo_pedido=item[0]) }}">Editar</a></td>
                                   </tr>
                               {% endfor %}
                             {% else %}

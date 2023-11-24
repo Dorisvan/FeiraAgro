@@ -70,20 +70,27 @@ class Perfil_ProdutorDAO():
         cursor = self.con.cursor()
 
         try:
-            sql = "SELECT * FROM Perfil_produtor WHERE codigo = %s"
+            sql = "SELECT * FROM Perfil_produtor WHERE  Usuario_codigo = %s"
 
-            cursor.execute(sql)
+            cursor.execute(sql, (codigo,))
             resultado = cursor.fetchone()
 
             if resultado != None:
-                Situacao = "OK"
+                resultado = list(resultado)
+
+                if resultado[1] != "" and resultado[2] != "" and (resultado[3] != "" or resultado[4] != "" or resultado[5] != "" or resultado[6] != ""):
+                    Situacao = "Ok"
+                    return Situacao
+
+                else:
+                    Situacao = "Pendente"
+                    return Situacao
+
             else:
                 Situacao = "Pendente"
-
-            return Situacao
+                return Situacao
 
         except:
-            Situacao
             pass
 
 

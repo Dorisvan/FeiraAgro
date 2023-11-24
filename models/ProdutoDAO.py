@@ -70,7 +70,7 @@ class ProdutoDAO():
             return None
 
 
-    def editar_produto(self, produto):
+    def Editar_produto(self, produto):
         try:
             sql = "UPDATE Produto " \
                   "SET nome=%s, classificacao=%s, valor=%s, quantidade=%s, procedencia=%s, descricao=%s, img_produto=%s" \
@@ -79,6 +79,7 @@ class ProdutoDAO():
             cursor = self.con.cursor()
             cursor.execute(sql, (produto.nome, produto.classificacao, produto.valor, produto.quantidade, produto.procedencia, produto.descricao, produto.img_produto, produto.codigo))
             self.con.commit()
+            print(cursor.rowcount)
             return cursor.rowcount
         except:
             return 0

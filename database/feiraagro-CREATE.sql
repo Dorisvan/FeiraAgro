@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `feiraagro`.`Pedido` (
   `quantidade` INT NOT NULL,
   `situacao` VARCHAR(50) NOT NULL,
   `modo_entrega` VARCHAR(50) NOT NULL,
+  `status_compra` VARCHAR(45) NULL,
   `Usuario_codigo` BIGINT NOT NULL,
   `Produto_codigo` BIGINT NOT NULL,
   PRIMARY KEY (`codigo`),
@@ -95,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `feiraagro`.`Perfil_Produtor` (
   `img1` VARCHAR(50) NULL,
   `img2` VARCHAR(50) NULL,
   `img3` VARCHAR(50) NULL,
+  `img_pix` VARCHAR(50) NULL,
   `Usuario_codigo` BIGINT NOT NULL,
   PRIMARY KEY (`codigo`),
   INDEX `fk_Perfil_Produtor_Usuario1_idx` (`Usuario_codigo` ASC),
@@ -118,6 +120,23 @@ CREATE TABLE IF NOT EXISTS `feiraagro`.`Mensagem` (
   PRIMARY KEY (`codigo`),
   INDEX `fk_Mensagem_Usuario1_idx` (`Usuario_codigo` ASC),
   CONSTRAINT `fk_Mensagem_Usuario1`
+    FOREIGN KEY (`Usuario_codigo`)
+    REFERENCES `feiraagro`.`Usuario` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `feiraagro`.`Carrinho`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `feiraagro`.`Carrinho` (
+  `codigo` BIGINT NOT NULL AUTO_INCREMENT,
+  `lista` VARCHAR(1000) NULL,
+  `Usuario_codigo` BIGINT NOT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `fk_Carrinho_Usuario1_idx` (`Usuario_codigo` ASC),
+  CONSTRAINT `fk_Carrinho_Usuario1`
     FOREIGN KEY (`Usuario_codigo`)
     REFERENCES `feiraagro`.`Usuario` (`codigo`)
     ON DELETE NO ACTION

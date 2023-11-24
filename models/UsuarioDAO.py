@@ -5,11 +5,11 @@ class UsuarioDAO():
     # CRUD --> Create, Retrieve, Uptade, Delete <--
     def Inserir(self, usuario):
         try:
-            sql = "INSERT INTO Usuario(nome, email, senha, endereco, tipo, nivel, contato, estado_login) " \
-                  "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO Usuario(nome, email, senha, endereco, tipo, nivel, contato, estado_login, imagem_perfil) " \
+                  "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
             cursor = self.con.cursor()
-            cursor.execute(sql, (usuario.nome, usuario.email, usuario.senha, usuario.endereco, usuario.tipo, usuario.nivel, usuario.contato, usuario.estado_login))
+            cursor.execute(sql, (usuario.nome, usuario.email, usuario.senha, usuario.endereco, usuario.tipo, usuario.nivel, usuario.contato, usuario.estado_login, usuario.imagem_perfil))
 
             self.con.commit()
 
@@ -114,16 +114,16 @@ class UsuarioDAO():
         try:
             sql = "SELECT * FROM Usuario WHERE codigo = %s"
 
-            cursor.execute(sql)
+            cursor.execute(sql, (codigo,))
             resultado = cursor.fetchone()
-            print(resultado)
+            resultado = list(resultado)
 
-            if resultado:
-                Situacao = "OK"
+            if resultado != None and resultado[4] != "" and resultado[5] != "" and resultado[5] !="Não sei":
+                Situacao = "Ok"
+                return Situacao
             else:
                 Situacao = "Pendente"
-
-            return Situacao
+                return Situacao
 
         except:
             pass

@@ -28,7 +28,7 @@
             {% endwith %}
           </div>
 
-          <form action="{{ url_for('editar_produto', codigo_produto=codigo_produto) }}" method="POST", enctype="multipart/form-data">
+          <form action="{{ url_for('editar_produto', codigo_produto=produto[0]) }}" method="POST", enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4 form-group container">
                   <input type="text" name="nome" class="form-control" value="{{ produto[1] }}" id="nome" placeholder="Nome do Produto" required>
@@ -40,7 +40,7 @@
                     <option value="Hortaliças e Verduras" {% if produto[4] == "Hortaliças e Verduras" %}{{ "selected" }}{% endif %}>Hortaliças e Verduras</option>
                     <option value="Grão e Cereais" {% if produto[4] == "Grão e Cereais" %}{{ "selected" }}{% endif %}>Grão e Cereais</option>
                     <option value="Frutas" {% if produto[4] == "Frutas" %}{{ "selected" }}{% endif %}>Frutas</option>
-                    <option value="Derivados do leite" {% if produto[4] == "Derivados de leite" %}{{ "selected" }}{% endif %}>Derivados de leite</option>
+                    <option value="Derivados do leite" {% if produto[4] == "Derivados do leite" %}{{ "selected" }}{% endif %}>Derivados de leite</option>
                     <option value="Molhos e Condimentos" {% if produto[4] == "Molhos e Condimentos" %}{{ "selected" }}{% endif %}>Molhos e Condimentos</option>
                     <option value="Sucos e Polpas" {% if produto[4] == "Sucos e Polpas" %}{{ "selected" }}{% endif %}>Sucos e Polpas</option>
                   </select>
@@ -64,12 +64,12 @@
                 <select name="procedencia" required class="form-control">
                   <option value="Não sei" {% if produto[5] == "Procedência" %}{{ "selected" }}{% endif %}>Procedência</option>
                   <option value="Orgânico" {% if produto[5] == "Orgânico" %}{{ "selected" }}{% endif %}>Orgânico</option>
-                  <option value="Não-orgânico" {% if produto[5] == "Não orgânico" %}{{ "selected" }}{% endif %}>Não orgânico</option>
+                  <option value="Não orgânico" {% if produto[5] == "Não orgânico" %}{{ "selected" }}{% endif %}>Não orgânico</option>
                 </select>
               </div>
 
               <div class="form-group mt-3">
-                <textarea class="form-control" name="descricao" rows="7" value="{{ produto[7] }}" placeholder="Descrição" ></textarea>
+                <textarea class="form-control" name="descricao" rows="7"  placeholder="Descrição">{{ produto[7] }}</textarea>
               </div>
 
               <div class="form-group mt-3">

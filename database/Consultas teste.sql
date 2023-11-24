@@ -30,6 +30,9 @@ VALUES ("Natata", 123, 123, "hortãliças", "orgânico", 2 , "abc", "123");
 INSERT INTO Usuario(nome, email, senha, endereco, tipo, nivel, contato)
 VALUES ("Emilly", "Emi@gmail.com", 123, "Bacurau", "Produtor", 1 , "9999999");
 
+INSERT INTO Pedido(data_pedido, data_entrega, quantidade, situacao, modo_entrega, status_compra, Usuario_codigo, Produto_codigo)
+VALUES ("2023-11-23", "2023-10-21", 1, "Entregue", "Delivery", "Finalizada" , 1, 2);
+
 
 SELECT DISTINCT p.codigo, p.nome, p.quantidade, p.valor, p.classificacao, p.procedencia, p.img_produto, p.descricao, p.Usuario_codigo as codigo_dono, u.nome as nome_do_produtor, u.contato, u.endereco, pf.local_venda
 FROM Produto as p, Usuario as u, Perfil_produtor as pf
