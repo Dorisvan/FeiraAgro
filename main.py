@@ -340,16 +340,16 @@ def verificar_perfil(tipo):
 @app.route('/baixar_arquivo, <codigo>, <arquivo>, <nome>, <tipo>, <classificacao>')
 def baixar_arquivo(codigo, imagem, tipo, classificacao, nome):
     try:
-        os.mkdir("perfis/"+str(codigo))
-        os.mkdir("perfis/" + str(codigo) +"/produtos")
-        os.mkdir("perfis/" + str(codigo) + "/perfil_usuario")
-        os.mkdir("perfis/" + str(codigo) + "/perfil_produtor")
+        os.mkdir("static/assets/perfis/"+str(codigo))
+        os.mkdir("static/assets/perfis/" + str(codigo) +"/produtos")
+        os.mkdir("static/assets/perfis/" + str(codigo) + "/perfil_usuario")
+        os.mkdir("static/assets/perfis/" + str(codigo) + "/perfil_produtor")
     except:
         pass
 
-    pasta_upload_produtos = os.path.join(os.getcwd(), "perfis/" + str(codigo) + "/produtos")
-    pasta_upload_perfil_usuario = os.path.join(os.getcwd(), "perfis/" + str(codigo) + "/perfil_usuario")
-    pasta_upload_perfil_produtor = os.path.join(os.getcwd(), "perfis/" + str(codigo) + "/perfil_produtor")
+    pasta_upload_produtos = os.path.join(os.getcwd(), "static/assets/perfis/" + str(codigo) + "/produtos")
+    pasta_upload_perfil_usuario = os.path.join(os.getcwd(), "static/assets/perfis/" + str(codigo) + "/perfil_usuario")
+    pasta_upload_perfil_produtor = os.path.join(os.getcwd(), "static/assets/perfis/" + str(codigo) + "/perfil_produtor")
 
     if classificacao == "criacao":
         if tipo == "produtos":
