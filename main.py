@@ -727,8 +727,11 @@ def visualizar_perfil():
     tipo_usuario = verificar_tipo_usuario()
 
     dao = Perfil_ProdutorDAO(get_db())
+    dao1 = UsuarioDAO(get_db())
     informacoes_usuario = session.get('logado')
     codigo = informacoes_usuario['codigo']
+    usuario = dao1.Listar(codigo, "Checagem_individual")
+    print(usuario)
     tipo = informacoes_usuario['tipo']
 
     if tipo == "Produtor":
@@ -740,7 +743,7 @@ def visualizar_perfil():
         perfil = perfil_produtor_db[0]
         perfil = list(perfil)
         print(perfil)
-    return render_template("visualizar_perfil.html", perfil_produtor=perfil, tipo=tipo, estado_login=resultado_login, tipo_usuario=tipo_usuario)
+    return render_template("visualizar_perfil.html", perfil_produtor=perfil, usuario=usuario, tipo=tipo, estado_login=resultado_login, tipo_usuario=tipo_usuario)
 
 
 

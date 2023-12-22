@@ -74,6 +74,12 @@
                     <li><a href="{{ url_for('visualizar_pedido', tipo="Meus") }}">Meus Pedidos</a></li>
                   </ul>
                 </li>
+                <li>
+                  <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                  <i class="mdi mdi-email"></i>
+                  <span class="count bg-success"></span>
+                </a>
+                </li>
               </ul>
             </li>
             <li><a href="/logout">Sair</a></li>
@@ -101,6 +107,12 @@
                   <ul>
                     <li><a href="{{ url_for('visualizar_pedido', tipo="Meus") }}">Meus Pedidos</a></li>
                   </ul>
+                </li>
+                <li>
+                  <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                  <i class="mdi mdi-email"></i>
+                  <span class="count bg-success"></span>
+                </a>
                 </li>
               </ul>
             </li>
@@ -131,6 +143,12 @@
                     <li><a href="{{ url_for('visualizar_pedido', tipo="Meus") }}">Meus Pedidos</a></li>
                   </ul>
                 </li>
+                <li>
+                  <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                  <i class="mdi mdi-email"></i>
+                  <span class="count bg-success"></span>
+                </a>
+                </li>
               </ul>
             </li>
             <li><a href="/logout">Sair</a></li>
@@ -159,6 +177,20 @@
             <li><a href="#footer">Contato</a></li>
             <li><a href="/cadastro">Cadastro</a></li>
             <li><a href="/login">Login</a></li>
+            <li>
+              <a class="nav-icon position-relative text-decoration-none" href="#">
+                <img src="static/assets/img/carrinho.png" style="width:27px; weight:27px">
+                <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">2</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                <img src="static/assets/img/email.png" style="width:20px; weight:20px">
+                <i class="mdi mdi-email"></i>
+                <span class="count bg-success"></span>
+              </a>
+            </li>
+
           {% endif %}
         </ul>
       </nav><!-- .navbar -->
