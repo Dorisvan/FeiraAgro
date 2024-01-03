@@ -508,7 +508,6 @@ section {
   .navbar a:focus {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 10px 20px;
     font-family: var(--font-primary);
     font-size: 15px;
@@ -2820,6 +2819,17 @@ button:hover {
   color: #00b6a1;
   text-decoration: none;
 }
+
+.novos_spans{
+  position: absolute;
+  top: 0;
+  translate: middle;
+  badge:;
+  rounded: pill;
+  background: red;
+  text-color: light;
+}
+
 
 /*!
  * Font Awesome Free 5.15.1 by @fontawesome - https://fontawesome.com
