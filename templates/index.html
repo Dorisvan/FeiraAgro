@@ -82,7 +82,46 @@
                 </li>
               </ul>
             </li>
-            <li><a href="/logout">Sair</a></li>
+            <!--<li>
+              <a href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">
+                <img style="width=10px; height=10px" src="static/assets/img/Icone_Notificação.png">
+                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger" style="">{{ resultado_alertas[0] }}</span>
+              </a>
+            </li>
+            <span style="color:white">|</span>
+            <li>-->
+            <li>
+              <a href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">
+                <img src="static/assets/img/email.png" style="width:20px; weight:20px">
+                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger">{{ resultado_alertas[0] }}</span>
+              </a>
+            </li>
+            <span style="color:white">|</span>
+            <li>
+              <a href="{{ url_for('visualizar_pedido', tipo="Meus") }}">
+                <img src="static/assets/img/Icone_Carrinho.png" style="width:27px; weight:27px">
+                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger">{{ resultado_alertas[1] }}</span>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+                  <a href="#">
+                    {% if usuarioin[9] == "" %}
+                       <img src="static/assets/img/Avatar_padrão.png" class="rounded-circle"
+                    height="32" width="32" alt="Avatar" loading="lazy" style="border: 2px solid #fff;
+        border-radius: 40%; overflow: hidden;"/>&nbsp;&nbsp;{{ usuarioin[1] }}
+                    {% else %}
+                       <img src="static/assets/perfis/{{ usuario[0] }}/{{ usuario[9] }}" class="rounded-circle"
+                    height="32" width="32" alt="Avatar" loading="lazy" style="border: 2px solid #fff;
+        border-radius: 40%; overflow: hidden;"/>&nbsp;&nbsp;{{ usuarioin[1] }}
+                    {% endif %}
+
+                  </a>
+                  <ul>
+                    <li><a class="dropdown-item" href="/area_do_usuario">Dados do usuário</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">Mensagens</a></li>
+                    <li><a class="dropdown-item" href="/logout">Sair</a></li>
+                </ul>
+            </li>
 
           {% elif estado_login == 0 and tipo_usuario == "Consumidor" or tipo_usuario == "" or tipo_usuario == "Não sei" %}
 
@@ -108,15 +147,48 @@
                     <li><a href="{{ url_for('visualizar_pedido', tipo="Meus") }}">Meus Pedidos</a></li>
                   </ul>
                 </li>
-                <li>
-                  <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                  <i class="mdi mdi-email"></i>
-                  <span class="count bg-success"></span>
-                </a>
-                </li>
               </ul>
             </li>
-            <li><a href="/logout">Sair</a></li>
+            <!--<li>
+              <a href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">
+                <img style="width=10px; height=10px" src="static/assets/img/Icone_Notificação.png">
+                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger" style="">{{ resultado_alertas[0] }}</span>
+              </a>
+            </li>
+            <span style="color:white">|</span>
+            <li>-->
+                <li>
+                  <a href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">
+                    <img src="static/assets/img/email.png" style="width:20px; weight:20px">
+                    <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger">{{ resultado_alertas[0] }}</span>
+                  </a>
+                </li>
+                <span style="color:white">|</span>
+                <li>
+                  <a href="{{ url_for('visualizar_pedido', tipo="Meus") }}">
+                    <img src="static/assets/img/Icone_Carrinho.png" style="width:27px; weight:27px">
+                    <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger">{{ resultado_alertas[1] }}</span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a href="#">
+                    {% if usuarioin[9] == "" %}
+                       <img src="static/assets/img/Avatar_padrão.png" class="rounded-circle"
+                    height="32" width="32" alt="Avatar" loading="lazy" style="border: 2px solid #fff;
+        border-radius: 40%; overflow: hidden;"/>&nbsp;&nbsp;{{ usuarioin[1] }}
+                    {% else %}
+                       <img src="static/assets/perfis/{{ usuario[0] }}/{{ usuario[9] }}" class="rounded-circle"
+                    height="32" width="32" alt="Avatar" loading="lazy" style="border: 2px solid #fff;
+        border-radius: 40%; overflow: hidden;"/>&nbsp;&nbsp;{{ usuarioin[1] }}
+                    {% endif %}
+
+                  </a>
+                  <ul>
+                    <li><a class="dropdown-item" href="/area_do_usuario">Dados do usuário</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">Mensagens</a></li>
+                    <li><a class="dropdown-item" href="/logout">Sair</a></li>
+                </ul>
+                </li>
 
           {% elif estado_login == 0 and tipo_usuario == "Ambos" %}
 
@@ -143,15 +215,48 @@
                     <li><a href="{{ url_for('visualizar_pedido', tipo="Meus") }}">Meus Pedidos</a></li>
                   </ul>
                 </li>
-                <li>
-                  <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                  <i class="mdi mdi-email"></i>
-                  <span class="count bg-success"></span>
-                </a>
-                </li>
+            <!--<li>
+              <a href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">
+                <img style="width=10px; height=10px" src="static/assets/img/Icone_Notificação.png">
+                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger" style="">{{ resultado_alertas[0] }}</span>
+              </a>
+            </li>
+            <span style="color:white">|</span>
+            <li>-->
+              <a href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">
+                <img src="static/assets/img/email.png" style="width:20px; weight:20px">
+                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger">{{ resultado_alertas[0] }}</span>
+              </a>
+            </li>
+            <span style="color:white">|</span>
+            <li>
+              <a href="{{ url_for('visualizar_pedido', tipo="Meus") }}">
+                <img src="static/assets/img/Icone_Carrinho.png" style="width:27px; weight:27px">
+                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger">{{ resultado_alertas[1] }}</span>
+              </a>
+            </li>
               </ul>
             </li>
-            <li><a href="/logout">Sair</a></li>
+            <li class="nav-item dropdown">
+                  <a href="#">
+                    {% if usuarioin[9] == "" %}
+                       <img src="static/assets/img/Avatar_padrão.png" class="rounded-circle"
+                    height="32" width="32" alt="Avatar" loading="lazy" style="border: 2px solid #fff;
+        border-radius: 40%; overflow: hidden;"/>&nbsp;&nbsp;{{ usuarioin[1] }}
+                    {% else %}
+                       <img src="static/assets/perfis/{{ usuario[0] }}/{{ usuario[9] }}" class="rounded-circle"
+                    height="32" width="32" alt="Avatar" loading="lazy" style="border: 2px solid #fff;
+        border-radius: 40%; overflow: hidden;"/>&nbsp;&nbsp;{{ usuarioin[1] }}
+                    {% endif %}
+
+                  </a>
+                  <ul>
+                    <li><a class="dropdown-item" href="/area_do_usuario">Dados do usuário</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">Mensagens</a></li>
+                    <li><a class="dropdown-item" href="/logout">Sair</a></li>
+                </ul>
+            </li>
+
 
           {% else %}
 
@@ -177,27 +282,6 @@
             <li><a href="#footer">Contato</a></li>
             <li><a href="/cadastro">Cadastro</a></li>
             <li><a href="/login">Login</a></li>
-            <li>
-              <a href="#">
-                <img style="width=10px; height=10px" src="static/assets/img/Icone_Notificação.png">
-                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger" style="">2</span>
-              </a>
-            </li>
-            <span style="color:white">|</span>
-            <li>
-              <a href="#">
-                <img src="static/assets/img/email.png" style="width:20px; weight:20px">
-                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger">2</span>
-              </a>
-            </li>
-            <span style="color:white">|</span>
-            <li>
-              <a href="#">
-                <img src="static/assets/img/Icone_Carrinho.png" style="width:27px; weight:27px">
-                <span class="position-relative top-0 start-0 translate-middle badge rounded-pill bg-danger">2</span>
-              </a>
-            </li>
-
           {% endif %}
         </ul>
       </nav><!-- .navbar -->
@@ -460,6 +544,9 @@
   <script src="static/assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="static/assets/vendor/php-email-form/validate.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="static/assets/js/main.js"></script>

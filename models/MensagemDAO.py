@@ -44,6 +44,17 @@ class MensagemDAO():
         except:
             return None
 
+    def Alertas(self, codigo):
+        try:
+            cursor = self.con.cursor()
+            sql = "SELECT count(codigo)  FROM Mensagem WHERE Usuario_codigo=%s and situacao=%s"
+            cursor.execute(sql, (codigo, "Não_lida"))
+            Mensagens = cursor.fetchall()
+            return Mensagens
+
+        except:
+            return None
+
 
     def Atualizar(self, codigo):
         try:

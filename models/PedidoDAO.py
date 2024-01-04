@@ -61,6 +61,18 @@ class PedidoDAO():
         except:
             return None
 
+    def Alertas(self, codigo):
+        try:
+            cursor = self.con.cursor()
+            sql = "SELECT count(codigo) FROM Pedido WHERE Usuario_codigo=%s"
+            cursor.execute(sql, (codigo,))
+            Pedidos = cursor.fetchall()
+
+            return Pedidos
+
+        except:
+            return None
+
     def Atualizar(self, pedido):
         try:
             sql = "UPDATE Pedido " \

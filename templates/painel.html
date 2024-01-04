@@ -1,14 +1,170 @@
 {% extends "index.html" %}
 {% block tudo %}
 
-<section id="appointment" class="appointment section-bg" style="position: relative; height: 600px;">
+
+<section id="appointment" class="appointment section-bg" style="position: relative; height: auto;">
 <br>
     <div class="section-header">
                 <h2>Painel</h2>
     </div>
 <br>
 <br>
-<br>
+
+
+<div class="container" style="height: auto;">
+    <div class="div_externa_form_cadastro container" style="width: 1080px;">
+        <br>
+        <div class="section-header">
+            <h2>Painel</h2>
+        </div>
+        <div class="row">
+            <!-- Primeira Div -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="text-center">
+                        <div class="d-flex flex-column align-items-center" style="margin: 20px;">
+                            <img src="static/assets/img/User3.png" alt="User" style="height: 100px; width: 100px;">
+                            <div class="mt-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-botao-painel dropdown-toggle botao-painel" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Usuário
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <a class="dropdown-item" href="/area_do_usuario">Dados do Usuário</a>
+                                        <a class="dropdown-item" href="/perfil_produtor">Perfil do Produtor</a>
+                                        <a class="dropdown-item" href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">Mensagens</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segunda Div -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="text-center">
+                        <div class="d-flex flex-column align-items-center" style="margin: 20px;">
+                            <img src="static/assets/img/Frutas.png" alt="User" style="height: 100px; width: 100px;">
+                            <div class="mt-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-botao-painel dropdown-toggle botao-painel" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Produtos
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <a class="dropdown-item" href="/cadastrar_produto">Cadastrar Produtos</a>
+                                        <a class="dropdown-item" href="/visualizar_produtos, None">Visualizar Produtos</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terceira Div -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="text-center">
+                        <div class="d-flex flex-column align-items-center" style="margin: 20px;">
+                            <img src="static/assets/img/Cesta.png" alt="User" style="height: 100px; width: 100px;">
+                            <div class="mt-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-botao-painel dropdown-toggle botao-painel" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Pedidos
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                        <a class="dropdown-item" href="/visualizar_produtos, None">Meus pedidos</a>
+                                        <a class="dropdown-item" href="/visualizar_produtos, None">Pedidos do Produtor</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <!-- Primeira Div -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="text-center">
+                        <div class="d-flex flex-column align-items-center" style="margin: 20px;">
+                            <img src="static/assets/img/Mensagens.png" alt="User" style="height: 100px; width: 100px;">
+                            <div class="mt-3">
+                                <div class="dropdown">
+                                    <a class="btn btn-botao-painel botao-painel" type="button" href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">
+                                        Mensagens
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <a class="dropdown-item" href="#">Dados do Usuário</a>
+                                        <a class="dropdown-item" href="#">Perfil do Produtor</a>
+                                        <a class="dropdown-item" href="#">Mensagens</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Segunda Div -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="text-center">
+                        <div class="d-flex flex-column align-items-center" style="margin: 20px;">
+                            <img src="static/assets/img/Desenvolvimento.png" alt="User" style="height: 100px; width: 100px;">
+                            <div class="mt-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary botao-painel" type="button">
+                                        Em Desenvolvimento
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <a class="dropdown-item" href="/area_do_usuario">Dados do Usuário</a>
+                                        <a class="dropdown-item" href="/perfil_produtor">Perfil do Produtor</a>
+                                        <a class="dropdown-item" href="{{ url_for('visualizar_mensagens', tipo="Listagem_individual") }}">Mensagens</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terceira Div -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="text-center">
+                        <div class="d-flex flex-column align-items-center" style="margin: 20px;">
+                            <img src="static/assets/img/Desenvolvimento.png" alt="User" style="height: 100px; width: 100px;">
+                            <div class="mt-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary botao-painel" type="button">
+                                        Em Desenvolvimento
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                        <a class="dropdown-item" href="#">Dados do Usuário</a>
+                                        <a class="dropdown-item" href="#">Perfil do Produtor</a>
+                                        <a class="dropdown-item" href="#">Mensagens</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ... (o mesmo padrão para a segunda linha de divs) ... -->
+
+    </div>
+</div>
+
+
 <br>
 <br>
 <br>
