@@ -64,8 +64,8 @@ class PedidoDAO():
     def Alertas(self, codigo):
         try:
             cursor = self.con.cursor()
-            sql = "SELECT count(codigo) FROM Pedido WHERE Usuario_codigo=%s"
-            cursor.execute(sql, (codigo,))
+            sql = "SELECT count(codigo) FROM Pedido WHERE Usuario_codigo=%s and status_compra=%s"
+            cursor.execute(sql, (codigo, "Não finalizada"))
             Pedidos = cursor.fetchall()
 
             return Pedidos

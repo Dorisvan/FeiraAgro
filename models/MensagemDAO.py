@@ -4,12 +4,12 @@ class MensagemDAO():
 
     def Inserir(self, Mensagem):
         try:
-            sql = "INSERT INTO Mensagem(conteudo, tipo, situacao, Usuario_codigo) " \
-                  "VALUES (%s, %s, %s, %s)"
+            sql = "INSERT INTO Mensagem(titulo, conteudo, tipo, situacao, Usuario_codigo) " \
+                  "VALUES (%s,%s, %s, %s, %s)"
 
             cursor = self.con.cursor()
             cursor.execute(sql, (
-            Mensagem.conteudo, Mensagem.tipo, Mensagem.situacao, Mensagem.Usuario_codigo))
+            Mensagem.titulo, Mensagem.conteudo, Mensagem.tipo, Mensagem.situacao, Mensagem.Usuario_codigo))
 
             self.con.commit()
 

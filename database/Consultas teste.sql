@@ -32,6 +32,9 @@ VALUES ("Natata", 123, 123, "hortãliças", "orgânico", 2 , "abc", "123");
 INSERT INTO Usuario(nome, email, senha, endereco, tipo, nivel, contato, estado_login, imagem_perfil)
 VALUES ("Emilly", "Emi@gmail.com", 123, "Bacurau", "Produtor", 1 , "9999999", 0, "emi.png");
 
+INSERT INTO Usuario(nome, email, senha, endereco, tipo, nivel, contato, estado_login, imagem_perfil)
+VALUES ("Dorisvan", "Doris@gmail.com", 123, "Caraúbas", "Produtor", 1 , "9999999", 0, "doris.png");
+
 INSERT INTO Pedido(data_pedido, data_entrega, quantidade, situacao, modo_entrega, status_compra, Usuario_codigo, Produto_codigo)
 VALUES ("2023-11-23", "2023-10-21", 1, "Entregue", "Delivery", "Finalizada" , 1, 2);
 

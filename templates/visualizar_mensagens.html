@@ -5,6 +5,9 @@
 <section id="appointment" class="appointment section-bg" style="position: relative;">
       <div class="container" style="height: 50vh;">
         <div class="div_externa_form_visualizar_produto">
+            <div class="section-header">
+                <h2>Caixa de Mensagens</h2>
+            </div>
 
             <table class="table">
 
@@ -16,6 +19,7 @@
 
                             <thead>
                                 <th>Código</th>
+                                <th>Título</th>
                                 <th>Conteúdo</th>
                                 <th>Situação</th>
                                 <th>Opções</th>
@@ -27,6 +31,7 @@
                                   <tr>
                                       <td>{{ item[0] }}</td>
                                     <td>{{ item[1] }}</td>
+                                      <td>{{ item[2] }}</td>
                                     <td>{{ item[3] }}</td>
                                       <td> <a href="{{ url_for('atualizar_lida', codigo_mensagem=item[0]) }}">Marcar como lida</a>|</td>
 

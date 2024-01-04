@@ -133,6 +133,7 @@ def index():
         resultado_alertas = contagem()
     else:
         usuario = ""
+        resultado_alertas = 0
 
     return render_template("index.html", estado_login = resultado_login, tipo_usuario=tipo_usuario, usuarioin=usuario, resultado_alertas= resultado_alertas)
 
@@ -455,6 +456,7 @@ def cadastrar_pedido(codigo_produto):
 
     informacoes_usuario = session.get('logado')
     usuario_codigo = informacoes_usuario['codigo']
+    usuario_nome = informacoes_usuario['nome']
 
     informacoes_usuario = session.get('logado')
     codigo = informacoes_usuario['codigo']
@@ -463,6 +465,7 @@ def cadastrar_pedido(codigo_produto):
 
     dao1 = PedidoDAO(get_db())
     dao2 = ProdutoDAO(get_db())
+    dao3 = MensagemDAO(get_db())
 
     produtos_db = dao2.Listar(codigo_produto, "Checagem_individual")
 
@@ -481,6 +484,16 @@ def cadastrar_pedido(codigo_produto):
         dao2.Atualizar_quantidade(codigo_produto, valor_atualizado)
         # produto = Produto(produtos_db)
         # produto.setcodigo(codigo_produto)
+
+        produto_final = dao2.Listar(codigo_produto , "Checagem_individual")
+        produto_final = list(produto_final)
+        print(produto_final)
+        nome_produto = produto_final[1]
+        dono_produto = produto_final[8]
+
+
+        mensagem = Mensagem("Venda", str(usuario_nome) + " " + "pediu" + " "+ str(quantidade)+" "+"unidade(s) de" + " " + str(nome_produto) + ".", dono_produto, "Pedido", "Não_lida")
+        dao3.Inserir(mensagem)
 
     else:
         pass
